@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack serve --open",
-    "build": "webpack"
+    "start": "cross-env NODE_ENV=development webpack serve --open",
+    "build": "cross-env NODE_ENV=production webpack"
   },
   "keywords": [],
   "author": "",
@@ -23,11 +23,17 @@
     "@babel/preset-react": "^7.27.1",
     "@babel/preset-typescript": "^7.27.1",
     "@babel/runtime-corejs3": "^7.28.4",
+    "@types/node": "^24.5.2",
     "@types/react": "^19.1.13",
     "@types/react-dom": "^19.1.9",
     "babel-loader": "^10.0.0",
+    "cross-env": "^10.0.0",
     "css-loader": "^7.1.2",
+    "dotenv-webpack": "^8.1.1",
     "eslint": "^9.36.0",
+    "fork-ts-checker-webpack-plugin": "^9.1.0",
+    "html-webpack-plugin": "^5.6.4",
+    "mini-css-extract-plugin": "^2.9.4",
     "style-loader": "^4.0.0",
     "ts-loader": "^9.4.2",
     "typescript": "^5.9.2",

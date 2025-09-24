@@ -1,4 +1,8 @@
 const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const Dotenv = require("dotenv-webpack");
 
 module.exports = {
   entry: "./src/index.tsx", // 엔트리 포인트 설정
@@ -20,10 +24,31 @@ module.exports = {
       },
       {
         test: /\.css$/, // .css 파일에 대해
-        use: ["style-loader", "css-loader"], // 로더는 배열의 역순으로 적용됩니다.
+        use: [
+          process.env.NODE_ENV !== "production"
+            ? "style-loader"
+            : MiniCssExtractPlugin.loader,
+          "css-loader",
+        ],
       },
     ],
   },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: "./public/index.html", // 템플릿 파일 경로
+      filename: "index.html", // 생성될 HTML 파일 이름
+      inject: "body", // 스크립트를 body 태그 끝에 삽입
+    }),
+    new ForkTsCheckerWebpackPlugin({
+      async: false,
+    }),
+    ...(process.env.NODE_ENV === "production"
+      ? [new MiniCssExtractPlugin({ filename: "[name].[contenthash].css" })]
+      : []),
+    new Dotenv({
+      path: `./.env.${process.env.NODE_ENV}`, // 환경별 .env 파일 경로
+    }),
+  ],
   devServer: {
     static: path.join(__dirname, "public"), // 정적 파일을 제공할 디렉토리 설정
     compress: true,
