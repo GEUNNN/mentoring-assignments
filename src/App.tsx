@@ -14,7 +14,7 @@ const App: React.FC<AppProps> = ({ message }) => {
 
   return (
     <div className="app-container">
-      <h1>{message}</h1>
+      <h1>hello</h1>
     </div>
   );
 };

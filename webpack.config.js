@@ -56,6 +56,7 @@ module.exports = {
     open: true, // 서버 시작 시 브라우저 자동 열기
     hot: true, // 핫 모듈 교체 활성화
     historyApiFallback: true,
+    liveReload: true,
   },
   mode: "development", // 개발 모드 설정
 };
