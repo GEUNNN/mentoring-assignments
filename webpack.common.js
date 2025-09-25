@@ -53,14 +53,7 @@ module.exports = {
       require.resolve("react-refresh/babel"),
   ].filter(Boolean),
   devServer: {
-    static: path.join(__dirname, "public"), // 정적 파일을 제공할 디렉토리 설정
+    static: path.join(__dirname, "public"),
     compress: true,
-    port: 3000, // 개발 서버 포트 설정
-    open: true, // 서버 시작 시 브라우저 자동 열기
-    hot: true, // 핫 모듈 교체 활성화
-    historyApiFallback: true,
-    liveReload: true,
   },
-  devtool: "inline-source-map",
-  mode: "development", // 개발 모드 설정
 };
