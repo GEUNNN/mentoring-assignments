@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const Dotenv = require("dotenv-webpack");
+const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 
 module.exports = {
   entry: "./src/index.tsx", // 엔트리 포인트 설정
@@ -48,7 +49,9 @@ module.exports = {
     new Dotenv({
       path: `./.env.${process.env.NODE_ENV}`, // 환경별 .env 파일 경로
     }),
-  ],
+    process.env.NODE_ENV !== "production" &&
+      require.resolve("react-refresh/babel"),
+  ].filter(Boolean),
   devServer: {
     static: path.join(__dirname, "public"), // 정적 파일을 제공할 디렉토리 설정
     compress: true,
@@ -58,5 +61,6 @@ module.exports = {
     historyApiFallback: true,
     liveReload: true,
   },
+  devtool: "inline-source-map",
   mode: "development", // 개발 모드 설정
 };
