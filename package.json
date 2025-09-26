@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack serve --open",
-    "start": "webpack serve --config webpack.dev.js",
-    "build": "webpack --config webpack.prod.js"
+    "start": "cross-env NODE_ENV=development APP_PHASE=local webpack serve --config webpack.dev.js",
+    "build:staging": "cross-env NODE_ENV=production APP_PHASE=staging webpack --config webpack.prod.js",
+    "build:production": "cross-env NODE_ENV=production APP_PHASE=production webpack --config webpack.prod.js"
   },
   "keywords": [],
   "author": "",

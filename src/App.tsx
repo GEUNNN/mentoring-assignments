@@ -10,7 +10,9 @@ const App: React.FC<AppProps> = ({ message }) => {
     return a + b;
   };
 
-  console.log("API URL:", process.env.API_URL);
+  console.log("API_URL:", process.env.API_URL);
+  console.log("GOOGLE_MAP_API:", process.env.GOOGLE_MAP_API);
+  console.log("S3_API:", process.env.S3_API);
 
   return (
     <div className="app-container">

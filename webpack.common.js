@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const Dotenv = require("dotenv-webpack");
+const { DefinePlugin } = require("webpack");
 const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 
 module.exports = {
@@ -49,9 +50,19 @@ module.exports = {
     new Dotenv({
       path: `./.env.${process.env.NODE_ENV}`, // 환경별 .env 파일 경로
     }),
-    process.env.NODE_ENV !== "production" &&
-      require.resolve("react-refresh/babel"),
-  ].filter(Boolean),
+    new DefinePlugin({
+      "process.env.API_URL": JSON.stringify(
+        process.env.API_URL || "http://localhost:3000"
+      ),
+      "process.env.NODE_ENV": JSON.stringify(
+        process.env.NODE_ENV || "development"
+      ),
+      "process.env.APP_PHASE": JSON.stringify(process.env.APP_PHASE || "local"),
+    }),
+    ...(process.env.NODE_ENV !== "production"
+      ? [new ReactRefreshWebpackPlugin()]
+      : []),
+  ],
   devServer: {
     static: path.join(__dirname, "public"),
     compress: true,
