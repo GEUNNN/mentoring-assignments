@@ -1,10 +1,9 @@
-import path from "path";
-import HtmlWebpackPlugin from "html-webpack-plugin";
-import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
-import MiniCssExtractPlugin from "mini-css-extract-plugin";
-import Dotenv from "dotenv-webpack";
-import { DefinePlugin } from "webpack";
-import ReactRefreshWebpackPlugin from "@pmmmwh/react-refresh-webpack-plugin";
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const Dotenv = require("dotenv-webpack");
+const { DefinePlugin } = require("webpack");
 
 module.exports = {
   entry: "./src/index.tsx", // 엔트리 포인트 설정
@@ -44,9 +43,6 @@ module.exports = {
     new ForkTsCheckerWebpackPlugin({
       async: false,
     }),
-    ...(process.env.NODE_ENV === "production"
-      ? [new MiniCssExtractPlugin({ filename: "[name].[contenthash].css" })]
-      : []),
     new Dotenv({
       path: `./.env.${process.env.NODE_ENV}`, // 환경별 .env 파일 경로
     }),
@@ -59,9 +55,6 @@ module.exports = {
       ),
       "process.env.APP_PHASE": JSON.stringify(process.env.APP_PHASE || "local"),
     }),
-    ...(process.env.NODE_ENV !== "production"
-      ? [new ReactRefreshWebpackPlugin()]
-      : []),
   ],
   devServer: {
     static: path.join(__dirname, "public"),

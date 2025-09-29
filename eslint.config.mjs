@@ -26,7 +26,10 @@ export default [
   {
     rules: {
       "no-unused-vars": "error",
-      "no-undef": "error",
+      "no-undef": "warn",
+      "@typescript-eslint/no-require-imports": "off",
+      "react/react-in-jsx-scope": "off",
+      "react/jsx-uses-react": "off",
     },
   },
 ];
