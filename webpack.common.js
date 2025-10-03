@@ -1,7 +1,6 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+
 const Dotenv = require("dotenv-webpack");
 const { DefinePlugin } = require("webpack");
 
@@ -23,15 +22,6 @@ module.exports = {
           loader: "babel-loader", // Babel 로더를 사용하여 ES6+와 JSX 문법을 변환합니다.
         },
       },
-      {
-        test: /\.css$/, // .css 파일에 대해
-        use: [
-          process.env.NODE_ENV !== "production"
-            ? "style-loader"
-            : MiniCssExtractPlugin.loader,
-          "css-loader",
-        ],
-      },
     ],
   },
   plugins: [
@@ -39,9 +29,6 @@ module.exports = {
       template: "./public/index.html", // 템플릿 파일 경로
       filename: "index.html", // 생성될 HTML 파일 이름
       inject: "body", // 스크립트를 body 태그 끝에 삽입
-    }),
-    new ForkTsCheckerWebpackPlugin({
-      async: false,
     }),
     new Dotenv({
       path: `./.env.${process.env.NODE_ENV}`, // 환경별 .env 파일 경로

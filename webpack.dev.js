@@ -11,5 +11,13 @@ module.exports = merge(common, {
     port: 3000,
     hot: true,
   },
+  module: {
+    rules: [
+      {
+        test: /\.css$/, // .css 파일에 대해
+        use: ["style-loader", "css-loader"],
+      },
+    ],
+  },
   plugins: [new ReactRefreshWebpackPlugin()],
 });
