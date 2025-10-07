@@ -1,7 +1,7 @@
 import Logo from "../assets/logo.png";
 import Bell from "../assets/bell-860.png";
 import "./Header.css";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 interface HeaderProps {
   isSearchPage: boolean;
@@ -43,7 +43,9 @@ const Header = ({ isSearchPage = false }: HeaderProps) => {
     <header className="header-container">
       <nav className="header-nav">
         <div className="nav-left">
-          <img src={Logo} alt="WATCHA" className="logo" />
+          <Link to="/">
+            <img src={Logo} alt="WATCHA" className="logo" />
+          </Link>
           <ul className="main-menu">
             <li>
               <a href="#subscribe">구독</a>
