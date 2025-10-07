@@ -1,7 +1,9 @@
+import Header from "../components/Header";
+
 const Search = () => {
   return (
     <div>
-      <div>Search</div>
+      <Header isSearchPage={true} />
       Search
     </div>
   );

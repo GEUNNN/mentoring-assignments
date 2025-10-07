@@ -22,6 +22,13 @@ module.exports = {
           loader: "babel-loader", // Babel 로더를 사용하여 ES6+와 JSX 문법을 변환합니다.
         },
       },
+      {
+        test: /\.(png|jpe?g|gif|svg|webp|ico)$/i, // Added webp and ico
+        type: "asset/resource",
+        generator: {
+          filename: "assets/images/[name].[ext]",
+        },
+      },
     ],
   },
   plugins: [
