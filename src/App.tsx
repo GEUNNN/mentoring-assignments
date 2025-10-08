@@ -1,12 +1,70 @@
-import { Link } from "react-router";
 import Header from "./components/Header";
+import "./App.css";
+import { useEffect, useState } from "react";
+import { Link } from "react-router";
 
 const App = () => {
+  const [movieList, setMovieList] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const url = `${process.env.API_URL}/trending/movie/day?language=en-US`;
+  const accessToken = process.env.ACCESS_TOKEN;
+  const options = {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      Authorization: `Bearer ${accessToken}`,
+    },
+  };
+
+  useEffect(() => {
+    fetch(url, options)
+      .then((res) => res.json())
+      .then((json) => setMovieList(json.results))
+      .catch((err) => console.error(err));
+  }, []);
+
+  const handlePrevious = () => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === 0 ? movieList.length - 1 : prevIndex - 1
+    );
+  };
+
+  const handleNext = () => {
+    setCurrentIndex((nextIndex) =>
+      nextIndex === movieList.length - 1 ? 0 : nextIndex + 1
+    );
+  };
+
+  const slideTransformStyle = {
+    transform: `translateX(-${currentIndex * 100}%)`,
+    transition: currentIndex === 0 ? "none" : "transform 0.5s ease-in-out",
+  };
+
   return (
     <div className="app-container">
-      <Header />
-      <h1>hello</h1>
-      <Link to="/search">Go to Search</Link>
+      <Header isSearchPage={false} />
+      <section className="carousel-container">
+        <div className="slide-container" style={slideTransformStyle}>
+          {movieList.map((movie: any) => (
+            <div key={movie.id} className="slide-item">
+              <Link to={`/contents/${movie.id}`}>
+                <img
+                  src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                  alt={movie.title}
+                  className="movie-poster"
+                />
+              </Link>
+            </div>
+          ))}
+        </div>
+        <button onClick={handlePrevious} className="nav-button left">
+          <span>❮</span>
+        </button>
+        <button onClick={handleNext} className="nav-button right">
+          <span>❯</span>
+        </button>
+      </section>
     </div>
   );
 };
