@@ -10,4 +10,4 @@ export const getApiOptions = () => {
   };
 };
 
-export const IMG_BASE_URL = "https://image.tmdb.org/t/p/";
+export const IMG_BASE_URL = "https://image.tmdb.org/t/p/w500";
