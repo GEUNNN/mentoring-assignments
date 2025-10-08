@@ -5,9 +5,10 @@ import { Link, useNavigate } from "react-router";
 
 interface HeaderProps {
   isSearchPage: boolean;
+  setKeyword?: (keyword: string) => void;
 }
 
-const Header = ({ isSearchPage = false }: HeaderProps) => {
+const Header = ({ isSearchPage = false, setKeyword }: HeaderProps) => {
   const navigate = useNavigate();
   const handleSearchClick = () => {
     navigate("/search");
@@ -22,6 +23,7 @@ const Header = ({ isSearchPage = false }: HeaderProps) => {
             placeholder="콘텐츠, 태그, 인물, 리스트 검색"
             className="search-input full-width"
             autoFocus
+            onChange={(e) => setKeyword && setKeyword(e.target.value)}
           />
         </div>
       );

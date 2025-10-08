@@ -2,23 +2,16 @@ import Header from "./components/Header";
 import "./App.css";
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
+import { getApiOptions } from "./utils/apiConfig";
 
 const App = () => {
   const [movieList, setMovieList] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const url = `${process.env.API_URL}/trending/movie/day?language=en-US`;
-  const accessToken = process.env.ACCESS_TOKEN;
-  const options = {
-    method: "GET",
-    headers: {
-      accept: "application/json",
-      Authorization: `Bearer ${accessToken}`,
-    },
-  };
 
   useEffect(() => {
-    fetch(url, options)
+    fetch(url, getApiOptions())
       .then((res) => res.json())
       .then((json) => setMovieList(json.results))
       .catch((err) => console.error(err));
