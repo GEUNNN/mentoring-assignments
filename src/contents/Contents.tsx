@@ -29,8 +29,6 @@ const Contents = () => {
       .catch((err) => console.error(err));
   }, [id]);
 
-  console.log("detail >>>", detail);
-
   if (!detail) return <div className="content-container">Loading...</div>;
 
   return (
@@ -38,19 +36,29 @@ const Contents = () => {
       <Header isSearchPage={false} />
       <section className="detail-section">
         <div className="detail-info">
-          <div>{title}</div>
-          <div className="detail-subinfo">
-            <span>{release_date}</span>
-            <span>{runtime}분</span>
+          <h1 className="content-title">{title}</h1>
+          <div className="detail-subinfo-primary">
+            <span>{release_date?.substring(0, 4)}</span>
+            <span>{`${runtime}분`}</span>
             <span>{genres?.[0]?.name}</span>
           </div>
-          <div>{overview}</div>
-          <div className="detail-subinfo">
-            <span>{vote_average}</span>
-            <span>{vote_count?.toLocaleString()}</span>
+
+          <p className="content-overview">{overview}</p>
+          <div className="detail-rating-info">
+            <div className="detail-rating-item">
+              <div className="value">
+                ⭐️ {vote_average ? vote_average.toFixed(1) : "N/A"}
+              </div>
+              <div className="label">평균 별점</div>
+            </div>
+
+            <div className="detail-rating-item">
+              <div className="value">{vote_count?.toLocaleString()}</div>
+              <div className="label">참여</div>
+            </div>
           </div>
         </div>
-        <div>
+        <div className="detail-movie-poster-wrapper">
           <img
             className="detail-movie-poster"
             src={`${IMG_BASE_URL}${detail?.poster_path}`}

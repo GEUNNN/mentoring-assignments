@@ -2,7 +2,7 @@ import Header from "./components/Header";
 import "./App.css";
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
-import { getApiOptions } from "./utils/apiConfig";
+import { getApiOptions, IMG_BASE_URL } from "./utils/apiConfig";
 
 const App = () => {
   const [movieList, setMovieList] = useState([]);
@@ -43,7 +43,7 @@ const App = () => {
             <div key={movie.id} className="slide-item">
               <Link to={`/contents/${movie.id}`}>
                 <img
-                  src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                  src={`${IMG_BASE_URL}${movie.poster_path}`}
                   alt={movie.title}
                   className="movie-poster"
                 />
