@@ -18,15 +18,6 @@ module.exports = merge(common, {
     new ForkTsCheckerWebpackPlugin({
       async: false,
     }),
-    new DefinePlugin({
-      "process.env.API_URL": JSON.stringify(
-        process.env.API_URL || "http://localhost:3000"
-      ),
-      "process.env.NODE_ENV": JSON.stringify(
-        process.env.NODE_ENV || "development"
-      ),
-      "process.env.APP_PHASE": JSON.stringify(process.env.APP_PHASE || "local"),
-    }),
     [new MiniCssExtractPlugin({ filename: "[name].[contenthash].css" })],
   ],
 });

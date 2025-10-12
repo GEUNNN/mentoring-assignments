@@ -1,3 +1,4 @@
+import React from "react";
 import { IMG_BASE_URL } from "../../utils/apiConfig";
 import "../Search.css";
 
@@ -6,7 +7,7 @@ interface ResultItemProps {
   image: string;
 }
 
-const ResultItems = ({ title, image }: ResultItemProps) => {
+const ResultItems: React.FC<ResultItemProps> = ({ title, image }) => {
   return (
     <div className="result-item-container">
       <img

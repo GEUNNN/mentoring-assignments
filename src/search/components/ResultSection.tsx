@@ -1,3 +1,4 @@
+import React from "react";
 import { MovieListItem } from "../Search.type";
 import ResultItems from "./ResultItems";
 
@@ -6,7 +7,10 @@ interface ResultSectionProps {
   keyword: string;
 }
 
-const ResultSection = ({ searchResults, keyword }: ResultSectionProps) => {
+const ResultSection: React.FC<ResultSectionProps> = ({
+  searchResults,
+  keyword,
+}) => {
   return (
     <section className="search-results-container">
       {searchResults.length > 0 ? (

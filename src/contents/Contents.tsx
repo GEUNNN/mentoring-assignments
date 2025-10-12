@@ -1,3 +1,4 @@
+import React from "react";
 import { useParams } from "react-router";
 import Header from "../components/Header";
 import "./Contents.css";
@@ -5,7 +6,7 @@ import { useEffect, useState } from "react";
 import { Detail } from "./Contents.type";
 import { getApiOptions, IMG_BASE_URL } from "../utils/apiConfig";
 
-const Contents = () => {
+const Contents: React.FC = () => {
   const { id } = useParams();
   const [detail, setDetail] = useState<Detail>();
   const {

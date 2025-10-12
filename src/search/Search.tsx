@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import "./Search.css";
 import { getApiOptions } from "../utils/apiConfig";
@@ -6,7 +6,7 @@ import ResultSection from "./components/ResultSection";
 import GenreSection from "./components/GenreSection";
 import { MovieListItem } from "./Search.type";
 
-const Search = () => {
+const Search: React.FC = () => {
   const [keyword, setKeyword] = useState("");
   const [genres, setGenres] = useState([]);
   const [searchResults, setSearchResults] = useState<MovieListItem[]>([]);

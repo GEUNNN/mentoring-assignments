@@ -2,13 +2,17 @@ import Logo from "../assets/logo.png";
 import Bell from "../assets/bell-860.png";
 import "./Header.css";
 import { Link, useNavigate } from "react-router";
+import React from "react";
 
 interface HeaderProps {
   isSearchPage: boolean;
   setKeyword?: (keyword: string) => void;
 }
 
-const Header = ({ isSearchPage = false, setKeyword }: HeaderProps) => {
+const Header: React.FC<HeaderProps> = ({
+  isSearchPage = false,
+  setKeyword,
+}) => {
   const navigate = useNavigate();
   const handleSearchClick = () => {
     navigate("/search");

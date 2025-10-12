@@ -1,3 +1,4 @@
+import React from "react";
 import "../Search.css";
 import { Genre } from "../Search.type";
 import GenreItem from "./GenreItem";
@@ -6,7 +7,7 @@ interface GenreSectionProps {
   genres: Genre[];
 }
 
-const GenreSection = ({ genres }: GenreSectionProps) => {
+const GenreSection: React.FC<GenreSectionProps> = ({ genres }) => {
   return (
     <section className="carousel-container">
       <p>비디오 장르</p>
