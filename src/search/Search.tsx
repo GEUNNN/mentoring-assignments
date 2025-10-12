@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import "./Search.css";
-import { getApiOptions } from "../utils/apiConfig";
+import { getApiOptions } from "../apis/config";
 import ResultSection from "./components/ResultSection";
 import GenreSection from "./components/GenreSection";
 import { MovieListItem } from "./Search.type";

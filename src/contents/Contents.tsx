@@ -4,7 +4,7 @@ import Header from "../components/Header";
 import "./Contents.css";
 import { useEffect, useState } from "react";
 import { Detail } from "./Contents.type";
-import { getApiOptions, IMG_BASE_URL } from "../utils/apiConfig";
+import { getApiOptions, IMG_BASE_URL } from "../apis/config";
 
 const Contents: React.FC = () => {
   const { id } = useParams();

@@ -1,5 +1,5 @@
 import React from "react";
-import { IMG_BASE_URL } from "../../utils/apiConfig";
+import { IMG_BASE_URL } from "../../apis/config";
 import "../Search.css";
 
 interface ResultItemProps {

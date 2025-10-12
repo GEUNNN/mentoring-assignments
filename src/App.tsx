@@ -2,7 +2,7 @@ import Header from "./components/Header";
 import "./App.css";
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
-import { getApiOptions, IMG_BASE_URL } from "./utils/apiConfig";
+import { getApiOptions, IMG_BASE_URL } from "./apis/config";
 
 const App = () => {
   const [movieList, setMovieList] = useState([]);
