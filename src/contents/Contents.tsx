@@ -4,7 +4,8 @@ import Header from "../components/Header";
 import "./Contents.css";
 import { useEffect, useState } from "react";
 import { Detail } from "./Contents.type";
-import { getApiOptions, IMG_BASE_URL } from "../apis/config";
+import { IMG_BASE_URL } from "../apis/config";
+import instance from "../apis/axiosInstance";
 
 const Contents: React.FC = () => {
   const { id } = useParams();
@@ -19,15 +20,14 @@ const Contents: React.FC = () => {
     vote_count,
   } = detail || {};
 
-  const url = `${process.env.API_URL}/movie/${id}`;
+  const url = `/movie/${id}`;
 
   useEffect(() => {
     if (!id) return;
 
-    fetch(url, getApiOptions())
-      .then((res) => res.json())
-      .then((json) => setDetail(json))
-      .catch((err) => console.error(err));
+    instance.get(url).then((res) => {
+      setDetail(res.data);
+    });
   }, [id]);
 
   if (!detail) return <div className="content-container">Loading...</div>;
