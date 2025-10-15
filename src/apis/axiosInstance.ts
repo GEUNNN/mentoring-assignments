@@ -26,7 +26,7 @@ instance.interceptors.response.use(
     }
     return response;
   },
-  (error: AxiosResponse<AxiosError, any>) => {
+  (error: AxiosResponse<AxiosError, Error>) => {
     if (isAxiosError(error)) {
       switch (error.response?.status) {
         case 401:

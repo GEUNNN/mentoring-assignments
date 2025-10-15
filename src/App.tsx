@@ -2,20 +2,18 @@ import Header from "./components/Header";
 import "./App.css";
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
-import { getApiOptions, IMG_BASE_URL } from "./apis/config";
+import { IMG_BASE_URL } from "./apis/config";
+import { useQueryGetMainList } from "./apis/query";
 
 const App = () => {
   const [movieList, setMovieList] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-
-  const url = `${process.env.API_URL}/trending/movie/day?language=en-US`;
+  const { data: mainList } = useQueryGetMainList();
 
   useEffect(() => {
-    fetch(url, getApiOptions())
-      .then((res) => res.json())
-      .then((json) => setMovieList(json.results))
-      .catch((err) => console.error(err));
-  }, []);
+    if (!mainList) return;
+    setMovieList(mainList.results);
+  }, [mainList]);
 
   const handlePrevious = () => {
     setCurrentIndex((prevIndex) =>

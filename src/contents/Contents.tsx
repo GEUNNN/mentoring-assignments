@@ -2,14 +2,13 @@ import React from "react";
 import { useParams } from "react-router";
 import Header from "../components/Header";
 import "./Contents.css";
-import { useEffect, useState } from "react";
-import { Detail } from "./Contents.type";
 import { IMG_BASE_URL } from "../apis/config";
-import instance from "../apis/axiosInstance";
+import { useQueryGetDetailList } from "../apis/query";
 
 const Contents: React.FC = () => {
   const { id } = useParams();
-  const [detail, setDetail] = useState<Detail>();
+
+  const { data: detail } = useQueryGetDetailList(id!);
   const {
     title,
     release_date,
@@ -19,16 +18,6 @@ const Contents: React.FC = () => {
     vote_average,
     vote_count,
   } = detail || {};
-
-  const url = `/movie/${id}`;
-
-  useEffect(() => {
-    if (!id) return;
-
-    instance.get(url).then((res) => {
-      setDetail(res.data);
-    });
-  }, [id]);
 
   if (!detail) return <div className="content-container">Loading...</div>;
 

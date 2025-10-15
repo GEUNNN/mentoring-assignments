@@ -4,16 +4,21 @@ import App from "./App";
 import Search from "./search/Search";
 import Contents from "./contents/Contents";
 import { BrowserRouter, Route, Routes } from "react-router";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const rootElement = document.getElementById("root")!;
 const root = ReactDOM.createRoot(rootElement);
 
+const queryClient = new QueryClient();
+
 root.render(
-  <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<App />} />
-      <Route path="/search" element={<Search />} />
-      <Route path="/contents/:id" element={<Contents />} />
-    </Routes>
-  </BrowserRouter>
+  <QueryClientProvider client={queryClient}>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<App />} />
+        <Route path="/search" element={<Search />} />
+        <Route path="/contents/:id" element={<Contents />} />
+      </Routes>
+    </BrowserRouter>
+  </QueryClientProvider>
 );
