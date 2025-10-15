@@ -13,21 +13,16 @@ const ResultSection: React.FC<ResultSectionProps> = ({
 }) => {
   return (
     <section className="search-results-container">
-      {searchResults.length > 0 ? (
-        searchResults.map((item: MovieListItem) => (
-          <ResultItems
-            key={item.id}
-            title={item.title}
-            image={item.poster_path}
-          />
-        ))
-      ) : (
+      {searchResults?.map(({ id, title, poster_path }: MovieListItem) => (
+        <ResultItems key={id} title={title} image={poster_path} />
+      ))}
+      {searchResults.length === 0 || keyword.length < 2 ? (
         <p className="no-results-text">
-          {keyword.length >= 2
-            ? "검색 결과가 없습니다."
-            : "검색어를 입력해주세요 (최소 2자 이상)"}
+          {keyword.length < 2
+            ? "검색어를 입력해주세요 (최소 2자 이상)"
+            : "검색 결과가 없습니다."}
         </p>
-      )}
+      ) : null}
     </section>
   );
 };
