@@ -22,6 +22,13 @@ module.exports = {
           loader: "babel-loader", // Babel 로더를 사용하여 ES6+와 JSX 문법을 변환합니다.
         },
       },
+      {
+        test: /\.(png|jpe?g|gif|svg|webp|ico)$/i, // Added webp and ico
+        type: "asset/resource",
+        generator: {
+          filename: "assets/images/[name].[ext]",
+        },
+      },
     ],
   },
   plugins: [
@@ -34,9 +41,6 @@ module.exports = {
       path: `./.env.${process.env.NODE_ENV}`, // 환경별 .env 파일 경로
     }),
     new DefinePlugin({
-      "process.env.API_URL": JSON.stringify(
-        process.env.API_URL || "http://localhost:3000"
-      ),
       "process.env.NODE_ENV": JSON.stringify(
         process.env.NODE_ENV || "development"
       ),

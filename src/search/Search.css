@@ -1,0 +1,60 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.app-container {
+  padding-top: 60px;
+  background-color: black;
+  height: 100%;
+  color: white;
+  padding: 60px 50px;
+}
+
+h3 {
+  color: white;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.search-results-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin: 20px;
+}
+
+.result-item-container {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+  width: 150px;
+  cursor: pointer;
+}
+
+.result-movie-poster {
+  width: 100%;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.title {
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  width: 100%;
+}
+
+.genre-item {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+  width: 30%;
+  height: 30%;
+}
