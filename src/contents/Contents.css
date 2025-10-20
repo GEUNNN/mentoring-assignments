@@ -59,7 +59,6 @@
   display: flex;
   gap: 30px;
   padding-top: 10px;
-  border-top: 1px solid #222222;
 }
 
 .detail-rating-item {
@@ -80,6 +79,66 @@
   color: #888888;
 }
 
+.detail-actions-wrapper {
+  padding-top: 20px;
+  width: 100%;
+}
+
+.action-button-list {
+  display: flex; /* 버튼들을 가로로 나열 */
+  list-style: none; /* 리스트 기본 마커 제거 */
+  padding: 0;
+  margin: 0;
+  gap: 20px; /* 버튼들 사이의 간격 */
+}
+
+/* --- 2. 개별 버튼 아이템 스타일 --- */
+.action-button-item {
+  display: flex;
+  flex-direction: column; /* 아이콘과 텍스트를 위아래로 배치 */
+  align-items: center; /* 내부 요소를 가운데 정렬 */
+  cursor: pointer;
+  text-align: center;
+
+  /* 기본 버튼 텍스트 스타일 */
+  font-size: 14px;
+  color: #cccccc; /* 기본 색상은 밝은 회색 */
+
+  /* 마우스 오버 시 효과 */
+  transition: color 0.2s;
+}
+
+.action-button-item:hover {
+  color: #ffffff; /* 호버 시 텍스트를 더 밝게 */
+}
+
+/* --- 3. 아이콘 스타일 --- */
+.action-button-item .icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 20px; /* 아이콘 크기 */
+  margin-bottom: 5px; /* 아이콘과 텍스트 사이 간격 */
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+/* --- 5. 반응형 (모바일에서 버튼 간격 조정) --- */
+@media (max-width: 768px) {
+  .action-button-list {
+    gap: 10px;
+  }
+
+  .action-button-item .icon {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+  }
+
+  .action-button-item {
+    font-size: 13px;
+  }
+}
 .detail-movie-poster-wrapper {
   flex-shrink: 0;
   width: 280px;

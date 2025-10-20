@@ -47,6 +47,26 @@ const Contents: React.FC = () => {
               <div className="label">참여</div>
             </div>
           </div>
+          <div className="detail-actions-wrapper">
+            <ul className="action-button-list">
+              <li className="action-button-item">
+                <span className="icon">🤍</span>
+                <span className="label">보고싶어요</span>
+              </li>
+              <li className="action-button-item">
+                <span className="icon">⭐</span>
+                <span className="label">평가하기</span>
+              </li>
+              <li className="action-button-item">
+                <span className="icon">💬</span>
+                <span className="label">왓챠파티</span>
+              </li>
+              <li className="action-button-item">
+                <span className="icon">⋯</span>
+                <span className="label">더보기</span>
+              </li>
+            </ul>
+          </div>
         </div>
         <div className="detail-movie-poster-wrapper">
           <img
