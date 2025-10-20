@@ -19,3 +19,18 @@ export const getGenreList = async () => {
   const response = await instance.get(`/genre/movie/list?language=en`);
   return response.data;
 };
+
+export const postFavorite = async (movieId: number) => {
+  const response = await instance.post(
+    `/account/${process.env.ACCOUNT_ID}/favorite`,
+    {
+      media_type: "movie",
+      media_id: movieId,
+      favorite: true,
+    }
+  );
+
+  console.log("postFavorite response:", response);
+
+  return response.data;
+};

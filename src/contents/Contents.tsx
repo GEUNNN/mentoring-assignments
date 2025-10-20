@@ -3,7 +3,7 @@ import { useParams } from "react-router";
 import Header from "../components/Header";
 import "./Contents.css";
 import { IMG_BASE_URL } from "../apis/config";
-import { useQueryGetDetailList } from "../apis/query";
+import { useMutationPostFavorite, useQueryGetDetailList } from "../apis/query";
 
 const Contents: React.FC = () => {
   const { id } = useParams();
@@ -18,6 +18,8 @@ const Contents: React.FC = () => {
     vote_average,
     vote_count,
   } = detail || {};
+
+  const { mutate: postFavorite } = useMutationPostFavorite(Number(id));
 
   if (!detail) return <div className="content-container">Loading...</div>;
 
@@ -49,7 +51,7 @@ const Contents: React.FC = () => {
           </div>
           <div className="detail-actions-wrapper">
             <ul className="action-button-list">
-              <li className="action-button-item">
+              <li className="action-button-item" onClick={() => postFavorite()}>
                 <span className="icon">🤍</span>
                 <span className="label">보고싶어요</span>
               </li>
