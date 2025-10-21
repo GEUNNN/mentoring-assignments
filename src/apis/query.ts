@@ -5,6 +5,7 @@ import {
   getDetailList,
   getGenreList,
   postFavorite,
+  getCredits,
 } from "./axiosClient";
 
 export const useQueryGetMainList = () =>
@@ -42,4 +43,10 @@ export const useMutationPostFavorite = (movieId: number) =>
     onError: (error) => {
       console.error("Error posting favorite:", error);
     },
+  });
+
+export const useQueryGetCredits = (id: string) =>
+  useQuery({
+    queryKey: ["credits", id],
+    queryFn: () => getCredits(id),
   });

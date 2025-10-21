@@ -3,7 +3,11 @@ import { useParams } from "react-router";
 import Header from "../components/Header";
 import "./Contents.css";
 import { IMG_BASE_URL } from "../apis/config";
-import { useMutationPostFavorite, useQueryGetDetailList } from "../apis/query";
+import {
+  useMutationPostFavorite,
+  useQueryGetDetailList,
+  useQueryGetCredits,
+} from "../apis/query";
 
 const Contents: React.FC = () => {
   const { id } = useParams();
@@ -20,6 +24,13 @@ const Contents: React.FC = () => {
   } = detail || {};
 
   const { mutate: postFavorite } = useMutationPostFavorite(Number(id));
+
+  const { data: credits } = useQueryGetCredits(id!);
+  const { cast, crew } = credits || {};
+  const castMembers = cast?.slice(0, 5);
+  const crewMembers = crew?.slice(0, 5);
+
+  console.log("crewMembers", crewMembers);
 
   if (!detail) return <div className="content-container">Loading...</div>;
 
@@ -77,6 +88,43 @@ const Contents: React.FC = () => {
             alt={detail?.title}
           />
         </div>
+      </section>
+      <section className="detail-credits">
+        <h2>출연/제작진</h2>
+        <ul className="detail-cast-list">
+          {castMembers?.map((cast, idx) => (
+            <li className="detail-cast-item" key={idx}>
+              <img
+                className="detail-cast-item-image"
+                src={`${IMG_BASE_URL}${cast.profile_path}`}
+                alt={cast.name}
+              />
+              <div className="detail-cast-item-info">
+                <div className="detail-cast-item-name">{cast.name}</div>
+                <div className="detail-cast-item-character">
+                  {cast.character}
+                </div>
+              </div>
+            </li>
+          ))}
+        </ul>
+        <ul className="detail-crew-list">
+          {crewMembers?.map((crew, idx) => (
+            <li className="detail-crew-item" key={idx}>
+              {crew.profile_path && (
+                <img
+                  className="detail-crew-item-image"
+                  src={`${IMG_BASE_URL}${crew.profile_path}`}
+                  alt={crew.name}
+                />
+              )}
+              <div className="detail-crew-item-info">
+                <div className="detail-crew-item-name">{crew.name}</div>
+                <div className="detail-crew-item-job">{crew.job}</div>
+              </div>
+            </li>
+          ))}
+        </ul>
       </section>
     </div>
   );

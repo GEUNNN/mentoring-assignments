@@ -30,7 +30,10 @@ export const postFavorite = async (movieId: number) => {
     }
   );
 
-  console.log("postFavorite response:", response);
+  return response.data;
+};
 
+export const getCredits = async (id: string) => {
+  const response = await instance.get(`/movie/${id}/credits`);
   return response.data;
 };
