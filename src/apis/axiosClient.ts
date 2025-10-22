@@ -37,3 +37,8 @@ export const getCredits = async (id: string) => {
   const response = await instance.get(`/movie/${id}/credits`);
   return response.data;
 };
+
+export const getReviewList = async (id: string) => {
+  const response = await instance.get(`/movie/${id}/reviews`);
+  return response.data;
+};

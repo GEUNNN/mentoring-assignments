@@ -6,6 +6,7 @@ import {
   getGenreList,
   postFavorite,
   getCredits,
+  getReviewList,
 } from "./axiosClient";
 
 export const useQueryGetMainList = () =>
@@ -49,4 +50,10 @@ export const useQueryGetCredits = (id: string) =>
   useQuery({
     queryKey: ["credits", id],
     queryFn: () => getCredits(id),
+  });
+
+export const useQueryGetReviewList = (id: string) =>
+  useQuery({
+    queryKey: ["review-list", id],
+    queryFn: () => getReviewList(id),
   });
