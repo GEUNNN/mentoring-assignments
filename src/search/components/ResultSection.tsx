@@ -13,9 +13,24 @@ const ResultSection: React.FC<ResultSectionProps> = ({
 }) => {
   return (
     <section className="search-results-container">
-      {searchResults?.map(({ id, title, poster_path }: MovieListItem) => (
-        <ResultItems key={id} title={title} image={poster_path} />
-      ))}
+      {searchResults?.map(
+        ({
+          id,
+          title,
+          poster_path,
+          release_date,
+          vote_average,
+        }: MovieListItem) => (
+          <ResultItems
+            key={id}
+            id={id}
+            title={title}
+            image={poster_path}
+            year={release_date}
+            voteAverage={vote_average}
+          />
+        )
+      )}
       {searchResults.length === 0 || keyword.length < 2 ? (
         <p className="no-results-text">
           {keyword.length < 2
