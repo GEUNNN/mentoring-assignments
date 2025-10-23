@@ -68,6 +68,7 @@ const App = () => {
                   <img
                     src={`${IMG_BASE_URL}${movie.poster_path}`}
                     alt={movie.title}
+                    loading="lazy"
                     className="upcoming-movies-poster"
                   />
                 </Link>

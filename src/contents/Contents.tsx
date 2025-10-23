@@ -99,6 +99,7 @@ const Contents: React.FC = () => {
             <li className="detail-cast-item" key={idx}>
               <img
                 className="detail-cast-item-image"
+                loading="lazy"
                 src={`${IMG_BASE_URL}${cast.profile_path}`}
                 alt={cast.name}
               />
@@ -117,6 +118,7 @@ const Contents: React.FC = () => {
               {crew.profile_path && (
                 <img
                   className="detail-crew-item-image"
+                  loading="lazy"
                   src={`${IMG_BASE_URL}${crew.profile_path}`}
                   alt={crew.name}
                 />
@@ -145,6 +147,7 @@ const Contents: React.FC = () => {
                           ? `${IMG_BASE_URL}${review.author_details.avatar_path}`
                           : ""
                       }
+                      loading="lazy"
                       alt={`${review.author} avatar`}
                     />
                     <div className="review-author-info">
