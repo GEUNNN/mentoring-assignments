@@ -42,3 +42,8 @@ export const getReviewList = async (id: string) => {
   const response = await instance.get(`/movie/${id}/reviews`);
   return response.data;
 };
+
+export const getUpcomingMovies = async () => {
+  const response = await instance.get(`/movie/upcoming`);
+  return response.data;
+};

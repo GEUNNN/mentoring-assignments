@@ -3,12 +3,14 @@ import "./App.css";
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import { IMG_BASE_URL } from "./apis/config";
-import { useQueryGetMainList } from "./apis/query";
+import { useQueryGetMainList, useQueryGetUpcomingMovies } from "./apis/query";
 
 const App = () => {
   const [movieList, setMovieList] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
+
   const { data: mainList } = useQueryGetMainList();
+  const { data: upcomingList } = useQueryGetUpcomingMovies();
 
   useEffect(() => {
     if (!mainList) return;
@@ -55,6 +57,24 @@ const App = () => {
         <button onClick={handleNext} className="nav-button right">
           <span>❯</span>
         </button>
+      </section>
+      <section>
+        <h2 className="upcoming-movies-label">Upcoming Movies</h2>
+        <div className="upcoming-movies-container">
+          {upcomingList &&
+            upcomingList.results.map((movie: any) => (
+              <div key={movie.id} className="upcoming-movies-item">
+                <Link to={`/contents/${movie.id}`}>
+                  <img
+                    src={`${IMG_BASE_URL}${movie.poster_path}`}
+                    alt={movie.title}
+                    className="upcoming-movies-poster"
+                  />
+                </Link>
+                <p className="upcoming-movies-title">{movie.title}</p>
+              </div>
+            ))}
+        </div>
       </section>
     </div>
   );

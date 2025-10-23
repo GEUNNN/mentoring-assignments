@@ -8,6 +8,7 @@
   padding-top: 60px;
   background-color: black;
   height: 100%;
+  min-height: 100vh;
 }
 
 .carousel-container {
@@ -73,4 +74,31 @@ h1 {
   color: white;
   text-align: center;
   margin-top: 20px;
+}
+
+.upcoming-movies-label {
+  color: white;
+  font-size: 24px;
+  margin: 20px;
+}
+
+.upcoming-movies-container {
+  display: flex;
+  overflow-x: auto;
+  padding: 20px;
+  gap: 10px;
+}
+
+.upcoming-movies-item {
+  min-width: 150px;
+}
+.upcoming-movies-poster {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.upcoming-movies-title {
+  color: white;
+  text-align: center;
+  margin-top: 10px;
 }
