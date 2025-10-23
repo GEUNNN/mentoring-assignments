@@ -3,6 +3,9 @@ declare namespace NodeJS {
     API_URL: string;
     GOOGLE_MAP_API: string;
     S3_API: string;
+    ACCESS_TOKEN: string;
+    API_KEY: string;
+    ACCOUNT_ID: string;
   }
 }
 
