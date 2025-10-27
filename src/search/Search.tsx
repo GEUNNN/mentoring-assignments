@@ -19,7 +19,9 @@ const Search: React.FC = () => {
         searchResults={searchList?.results || []}
         keyword={keyword}
       />
-      <GenreSection genres={genreList?.genres || []} />
+      {!searchList?.results.length && (
+        <GenreSection genres={genreList?.genres || []} />
+      )}
     </div>
   );
 };
