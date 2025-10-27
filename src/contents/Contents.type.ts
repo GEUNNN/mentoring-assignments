@@ -17,7 +17,7 @@ export interface ProductionCompany {
 export interface Detail {
   adult: boolean;
   backdrop_path: string;
-  belongs_to_collection: any;
+  belongs_to_collection: string;
   budget: number;
   genres: Genre[];
   homepage: string;
@@ -45,4 +45,54 @@ export interface Detail {
   status_code?: number;
   status_message?: string;
   success?: boolean;
+}
+
+export interface Cast {
+  adult: boolean;
+  gender: number | null;
+  id: number;
+  known_for_department: string;
+  name: string;
+  original_name: string;
+  popularity: number;
+  profile_path: string | null;
+  cast_id: number;
+  character: string;
+  credit_id: string;
+  order: number;
+}
+
+export interface Crew {
+  adult: boolean;
+  gender: number | null;
+  id: number;
+  known_for_department: string;
+  name: string;
+  original_name: string;
+  popularity: number;
+  profile_path: string | null;
+  credit_id: string;
+  department: string;
+  job: string;
+}
+
+export interface ReviewAuthorDetails {
+  name: string;
+  username: string;
+  avatar_path: string | null;
+  rating: number | null;
+}
+
+export interface ReviewDetail {
+  id: string;
+  author: string;
+  author_details: ReviewAuthorDetails;
+  content: string;
+  created_at: string;
+  iso_639_1: string;
+  media_id: number;
+  media_title: string;
+  media_type: "movie" | "tv";
+  url: string;
+  updated_at: string;
 }
