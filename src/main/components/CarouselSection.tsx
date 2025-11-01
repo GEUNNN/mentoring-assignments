@@ -1,4 +1,4 @@
-import { FC, useRef, useState } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
 import { IMG_BASE_URL } from "../../apis/config";
 
@@ -8,29 +8,56 @@ interface CarouselSectionProps {
 
 const CarouselSection: FC<CarouselSectionProps> = ({ movieList }) => {
   const [currentIndex, setCurrentIndex] = useState(1);
+  const isTransitioning = useRef(false);
+  const carouselRef = useRef(null);
 
-  const handlePrevious = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? movieList.length - 1 : prevIndex - 1
-    );
-  };
+  const extendedMovieList = [
+    movieList[movieList.length - 1],
+    ...movieList,
+    movieList[0],
+  ];
 
-  const handleNext = () => {
-    setCurrentIndex((nextIndex) =>
-      nextIndex === movieList.length - 1 ? 0 : nextIndex + 1
-    );
+  console.log("extendedMovieList >>>", extendedMovieList);
+
+  useEffect(() => {
+    if (isTransitioning.current) {
+      const timer = setTimeout(() => {
+        isTransitioning.current = false;
+        if (currentIndex >= movieList.length + 1) {
+          setCurrentIndex(1);
+        } else if (currentIndex <= 0) {
+          setCurrentIndex(movieList.length);
+        }
+      }, 300);
+      return () => clearTimeout(timer);
+    }
+  }, [currentIndex, movieList.length]);
+
+  const moveCarousel = (direction: number) => {
+    if (!isTransitioning.current) {
+      isTransitioning.current = true;
+      setCurrentIndex((prevIndex) => prevIndex + direction);
+    }
   };
 
   const slideTransformStyle = {
     transform: `translateX(-${currentIndex * 100}%)`,
-    transition: currentIndex === 0 ? "none" : "transform 0.5s ease-in-out",
+    transition: isTransitioning.current ? "transform 0.3s ease-in-out" : "none",
   };
+
+  if (!movieList || movieList.length === 0) {
+    return <section className="carousel-container">Loading...</section>;
+  }
 
   return (
     <section className="carousel-container">
-      <div className="slide-container" style={slideTransformStyle}>
-        {movieList.map((movie: any) => (
-          <div key={movie.id} className="slide-item">
+      <div
+        className="slide-container"
+        style={slideTransformStyle}
+        ref={carouselRef}
+      >
+        {extendedMovieList.map((movie: any, idx: number) => (
+          <div key={idx} className="slide-item">
             <Link to={`/contents/${movie.id}`}>
               <img
                 src={`${IMG_BASE_URL}${movie.poster_path}`}
@@ -41,10 +68,10 @@ const CarouselSection: FC<CarouselSectionProps> = ({ movieList }) => {
           </div>
         ))}
       </div>
-      <button onClick={handlePrevious} className="nav-button left">
+      <button onClick={() => moveCarousel(-1)} className="nav-button left">
         <span>❮</span>
       </button>
-      <button onClick={handleNext} className="nav-button right">
+      <button onClick={() => moveCarousel(1)} className="nav-button right">
         <span>❯</span>
       </button>
     </section>

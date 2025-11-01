@@ -1,12 +1,12 @@
 import Header from "../components/Header";
 import "./Main.css";
-import { useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { Link } from "react-router";
 import { IMG_BASE_URL } from "../apis/config";
 import { useQueryGetMainList, useQueryGetUpcomingMovies } from "../apis/query";
 import CarouselSection from "./components/CarouselSection";
 
-const Main = () => {
+const Main: FC = () => {
   const [movieList, setMovieList] = useState([]);
 
   const { data: mainList } = useQueryGetMainList();
