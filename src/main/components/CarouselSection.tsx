@@ -17,8 +17,6 @@ const CarouselSection: FC<CarouselSectionProps> = ({ movieList }) => {
     movieList[0],
   ];
 
-  console.log("extendedMovieList >>>", extendedMovieList);
-
   useEffect(() => {
     if (isTransitioning.current) {
       const timer = setTimeout(() => {
@@ -58,7 +56,7 @@ const CarouselSection: FC<CarouselSectionProps> = ({ movieList }) => {
       >
         {extendedMovieList.map((movie: any, idx: number) => (
           <div key={idx} className="slide-item">
-            <Link to={`/contents/${movie.id}`}>
+            <Link to={`/contents/${movie.id}`} state={{ type: "movie" }}>
               <img
                 src={`${IMG_BASE_URL}${movie.poster_path}`}
                 alt={movie.title}

@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams } from "react-router";
+import { useLocation, useParams } from "react-router";
 import Header from "../components/Header";
 import "./Contents.css";
 import {
@@ -14,8 +14,15 @@ import ReviewSection from "./components/ReviewSection";
 
 const Contents: React.FC = () => {
   const { id } = useParams();
+  const location = useLocation();
 
-  const { data: detail } = useQueryGetDetailList(id!);
+  const isMovie = location.state?.type === "movie";
+  const isTv = location.state?.type === "tv";
+
+  const { data: movieDetail } = useQueryGetDetailList(id!, isMovie);
+  const { data: tvDetail } = useQueryGetDetailList(id!, isTv);
+
+  const detail = isMovie ? movieDetail : tvDetail;
 
   const { mutate: postFavorite } = useMutationPostFavorite(Number(id));
 

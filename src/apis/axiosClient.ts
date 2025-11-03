@@ -15,6 +15,11 @@ export const getDetailList = async (id: string) => {
   return response.data;
 };
 
+export const getTvList = async (id: string) => {
+  const response = await instance.get(`/tv/${id}`);
+  return response.data;
+};
+
 export const getGenreList = async () => {
   const response = await instance.get(`/genre/movie/list?language=en`);
   return response.data;
@@ -40,6 +45,11 @@ export const getCredits = async (id: string) => {
 
 export const getReviewList = async (id: string) => {
   const response = await instance.get(`/movie/${id}/reviews`);
+  return response.data;
+};
+
+export const getAiringTodayTVShows = async () => {
+  const response = await instance.get(`/tv/airing_today`);
   return response.data;
 };
 
