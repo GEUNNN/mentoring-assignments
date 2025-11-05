@@ -8,6 +8,8 @@ import {
   getCredits,
   getReviewList,
   getUpcomingMovies,
+  getAiringTodayTVShows,
+  getTvList,
 } from "./axiosClient";
 
 export const useQueryGetMainList = () =>
@@ -23,10 +25,18 @@ export const useQueryGetSearchList = (keyword: string) =>
     queryFn: () => getSearchList(keyword),
   });
 
-export const useQueryGetDetailList = (id: string) =>
+export const useQueryGetDetailList = (id: string, enabled: boolean) =>
   useQuery({
     queryKey: ["detail-list"],
     queryFn: () => getDetailList(id),
+    enabled: enabled,
+  });
+
+export const useQueryGetTvList = (id: string, enabled: boolean) =>
+  useQuery({
+    queryKey: ["tv-list", id],
+    queryFn: () => getTvList(id),
+    enabled: enabled,
   });
 
 export const useQueryGetGenreList = () =>
@@ -57,6 +67,12 @@ export const useQueryGetReviewList = (id: string) =>
   useQuery({
     queryKey: ["review-list", id],
     queryFn: () => getReviewList(id),
+  });
+
+export const useQueryGetAiringTodayTVShows = () =>
+  useQuery({
+    queryKey: ["airing-today-tv-shows"],
+    queryFn: () => getAiringTodayTVShows(),
   });
 
 export const useQueryGetUpcomingMovies = () =>
