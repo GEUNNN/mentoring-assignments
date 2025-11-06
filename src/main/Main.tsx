@@ -6,8 +6,8 @@ import {
   useQueryGetMainList,
   useQueryGetUpcomingMovies,
 } from "../apis/query";
-import CarouselSection from "./components/CarouselSection";
 import MiniCarouselSection from "./components/MiniCarouselSection";
+import Carousel from "./components/Carousel/Carousel";
 
 const Main: FC = () => {
   const [movieList, setMovieList] = useState([]);
@@ -26,7 +26,11 @@ const Main: FC = () => {
   return (
     <div className="app-container">
       <Header isSearchPage={false} />
-      <CarouselSection movieList={movieList} />
+      <Carousel movieList={movieList}>
+        <Carousel.Track />
+        <Carousel.PrevButton />
+        <Carousel.NextButton />
+      </Carousel>
       <MiniCarouselSection label="Tv show" list={tvShowsArray} />
       <MiniCarouselSection
         label="Upcoming Movies"
