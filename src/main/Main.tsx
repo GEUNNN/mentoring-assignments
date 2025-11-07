@@ -1,6 +1,6 @@
 import Header from "../components/Header";
 import "./Main.css";
-import { FC, useEffect, useState } from "react";
+import { FC } from "react";
 import {
   useQueryGetAiringTodayTVShows,
   useQueryGetMainList,
@@ -10,18 +10,13 @@ import MiniCarouselSection from "./components/MiniCarouselSection";
 import Carousel from "./components/Carousel/Carousel";
 
 const Main: FC = () => {
-  const [movieList, setMovieList] = useState([]);
-
   const { data: mainList } = useQueryGetMainList();
   const { data: airingTodayList } = useQueryGetAiringTodayTVShows();
   const { data: upcomingList } = useQueryGetUpcomingMovies();
 
-  useEffect(() => {
-    if (!mainList) return;
-    setMovieList(mainList.results);
-  }, [mainList]);
-
+  const movieList = mainList?.results || [];
   const tvShowsArray = airingTodayList?.results || [];
+  const upcomingListArray = upcomingList?.results || [];
 
   return (
     <div className="app-container">
@@ -32,10 +27,7 @@ const Main: FC = () => {
         <Carousel.NextButton />
       </Carousel>
       <MiniCarouselSection label="Tv show" list={tvShowsArray} />
-      <MiniCarouselSection
-        label="Upcoming Movies"
-        list={upcomingList?.results || []}
-      />
+      <MiniCarouselSection label="Upcoming Movies" list={upcomingListArray} />
     </div>
   );
 };
