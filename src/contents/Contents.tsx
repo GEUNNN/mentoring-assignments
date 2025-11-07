@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { useLocation, useParams } from "react-router";
 import Header from "../components/Header";
 import "./Contents.css";
@@ -28,8 +28,8 @@ const Contents: React.FC = () => {
 
   const { data: credits } = useQueryGetCredits(id!);
   const { cast, crew } = credits || {};
-  const castMembers = cast?.slice(0, 5);
-  const crewMembers = crew?.slice(0, 5);
+  const castMembers = useMemo(() => cast?.slice(0, 5), [cast]);
+  const crewMembers = useMemo(() => crew?.slice(0, 5), [crew]);
 
   const { data: reviewList } = useQueryGetReviewList(id!);
   const reviews = reviewList?.results || [];
