@@ -13,13 +13,13 @@ const CastSection: FC<CastSectionProps> = ({ castMembers, crewMembers }) => {
     <section className="detail-credits">
       <h2>출연/제작진</h2>
       <ul className="detail-cast-list">
-        {castMembers.map((cast, idx) => (
-          <CastItem key={idx} cast={cast} />
+        {castMembers.map((cast) => (
+          <CastItem key={cast.id} cast={cast} />
         ))}
       </ul>
       <ul className="detail-crew-list">
-        {crewMembers.map((crew, idx) => (
-          <CrewItem key={idx} crew={crew} />
+        {crewMembers.map((crew) => (
+          <CrewItem key={crew.id} crew={crew} />
         ))}
       </ul>
     </section>

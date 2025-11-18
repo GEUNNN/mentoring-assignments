@@ -55,8 +55,8 @@ const CarouselSection: FC<CarouselSectionProps> = ({ movieList }) => {
         style={slideTransformStyle}
         ref={carouselRef}
       >
-        {extendedMovieList.map((movie: MainListResult, idx: number) => (
-          <div key={idx} className="slide-item">
+        {extendedMovieList.map((movie: MainListResult) => (
+          <div key={movie.id} className="slide-item">
             <Link to={`/contents/${movie.id}`} state={{ type: "movie" }}>
               <img
                 src={`${IMG_BASE_URL}${movie.poster_path}`}

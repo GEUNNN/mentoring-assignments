@@ -58,11 +58,8 @@ const MiniCarouselSection: FC<MiniCarouselSectionProps> = ({ list, label }) => {
             ref={carouselRef}
             style={slideTransformStyle}
           >
-            {extenedList.map((item: MainListResult, idx: number) => (
-              <div
-                key={item.id ? `movie-${item.id}` : `clone-${idx}`}
-                className="mini-slide-item"
-              >
+            {extenedList.map((item: MainListResult) => (
+              <div key={item.id} className="mini-slide-item">
                 <Link
                   to={`/contents/${item.id}`}
                   state={{ type: "tv" }}
