@@ -1,15 +1,8 @@
-import React, {
-  createContext,
-  FC,
-  ReactNode,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { createContext, FC, ReactNode, useContext } from "react";
 import { Link } from "react-router";
 import { IMG_BASE_URL } from "../../../apis/config";
 import { MainListResult } from "../../Main.type";
+import { useCarousel } from "../../../hooks/useCarousel";
 
 interface CarouselContextProps {
   extendedMovieList: MainListResult[];
@@ -77,39 +70,15 @@ const Carousel: CarouselComponent = ({
   movieList,
   children,
 }: CarouselProps) => {
-  const [currentIndex, setCurrentIndex] = useState(1);
-  const isTransitioning = useRef(false);
+  const { moveCarousel, slideTransformStyle } = useCarousel({
+    movieListLength: movieList.length,
+  });
 
   const extendedMovieList = [
     movieList[movieList.length - 1],
     ...movieList,
     movieList[0],
   ] as MainListResult[];
-
-  useEffect(() => {
-    if (isTransitioning.current) {
-      const timer = setTimeout(() => {
-        isTransitioning.current = false;
-        if (currentIndex >= movieList.length + 1) {
-          setCurrentIndex(1);
-        } else if (currentIndex <= 0) {
-          setCurrentIndex(movieList.length);
-        }
-      }, 300);
-      return () => clearTimeout(timer);
-    }
-  }, [currentIndex, movieList.length]);
-
-  const moveCarousel = (direction: number) => {
-    if (isTransitioning.current) return;
-    isTransitioning.current = true;
-    setCurrentIndex((prevIndex) => prevIndex + direction);
-  };
-
-  const slideTransformStyle = {
-    transform: `translateX(-${currentIndex * 100}%)`,
-    transition: isTransitioning.current ? "transform 0.3s ease-in-out" : "none",
-  };
 
   const value = {
     extendedMovieList,

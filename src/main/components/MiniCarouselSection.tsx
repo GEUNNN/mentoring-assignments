@@ -1,7 +1,8 @@
-import { FC, Suspense, useEffect, useRef, useState } from "react";
+import { FC, Suspense, useRef } from "react";
 import { IMG_BASE_URL } from "../../apis/config";
 import { Link } from "react-router";
 import { MainListResult } from "../Main.type";
+import { useCarousel } from "../../hooks/useCarousel";
 
 interface MiniCarouselSectionProps {
   list: MainListResult[];
@@ -9,40 +10,15 @@ interface MiniCarouselSectionProps {
 }
 
 const MiniCarouselSection: FC<MiniCarouselSectionProps> = ({ list, label }) => {
-  const [currentIndex, setCurrentIndex] = useState(1);
-  const isTransitioning = useRef(false);
+  const { moveCarousel, slideTransformStyle } = useCarousel({
+    movieListLength: list.length,
+  });
   const carouselRef = useRef(null);
 
   const extenedList =
     list.length > 0
       ? ([list[list.length - 1], ...list, list[0]] as MainListResult[])
       : [];
-
-  useEffect(() => {
-    if (isTransitioning.current) {
-      const timer = setTimeout(() => {
-        isTransitioning.current = false;
-        if (currentIndex >= list.length + 1) {
-          setCurrentIndex(1);
-        } else if (currentIndex <= 0) {
-          setCurrentIndex(list.length);
-        }
-      }, 300);
-      return () => clearTimeout(timer);
-    }
-  }, [currentIndex, list.length]);
-
-  const moveCarousel = (direction: number) => {
-    if (!isTransitioning.current) {
-      isTransitioning.current = true;
-      setCurrentIndex((prevIndex) => prevIndex + direction);
-    }
-  };
-
-  const slideTransformStyle = {
-    transform: `translateX(-${currentIndex * 100}%)`,
-    transition: isTransitioning.current ? "transform 0.3s ease-in-out" : "none",
-  };
 
   const fallbackContent = (
     <section className="mini-carousel-container">Loading...</section>
