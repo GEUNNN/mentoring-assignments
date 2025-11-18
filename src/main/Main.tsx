@@ -5,7 +5,7 @@ import {
   useQueryGetAiringTodayTVShows,
   useQueryGetMainList,
   useQueryGetUpcomingMovies,
-} from "../apis/query";
+} from "../query/query";
 import MiniCarouselSection from "./components/MiniCarouselSection";
 import Carousel from "./components/Carousel/Carousel";
 

@@ -3,7 +3,7 @@ import Header from "../components/Header";
 import "./Search.css";
 import ResultSection from "./components/ResultSection";
 import GenreSection from "./components/GenreSection";
-import { useQueryGetGenreList, useQueryGetSearchList } from "../apis/query";
+import { useQueryGetGenreList, useQueryGetSearchList } from "../query/query";
 
 const Search: React.FC = () => {
   const [keyword, setKeyword] = useState("");

@@ -2,15 +2,13 @@ import React, { useMemo } from "react";
 import { useLocation, useParams } from "react-router";
 import Header from "../components/Header";
 import "./Contents.css";
-import {
-  useMutationPostFavorite,
-  useQueryGetDetailList,
-  useQueryGetCredits,
-  useQueryGetReviewList,
-} from "../apis/query";
+import { useQueryGetDetailList } from "../query/query";
 import DetailSection from "./components/DetailSection";
 import CastSection from "./components/CastSection";
 import ReviewSection from "./components/ReviewSection";
+import { useQueryGetCredits } from "../query/credits";
+import { useMutationPostFavorite } from "../query/post";
+import { useQueryGetReviewList } from "../query/review";
 
 const Contents: React.FC = () => {
   const { id } = useParams();
