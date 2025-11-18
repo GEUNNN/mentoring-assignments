@@ -1,9 +1,10 @@
 import { FC, Suspense, useEffect, useRef, useState } from "react";
 import { IMG_BASE_URL } from "../../apis/config";
 import { Link } from "react-router";
+import { MainListResult } from "../Main.type";
 
 interface MiniCarouselSectionProps {
-  list: any[];
+  list: MainListResult[];
   label?: string;
 }
 
@@ -13,7 +14,9 @@ const MiniCarouselSection: FC<MiniCarouselSectionProps> = ({ list, label }) => {
   const carouselRef = useRef(null);
 
   const extenedList =
-    list.length > 0 ? [list[list.length - 1], ...list, list[0]] : [];
+    list.length > 0
+      ? ([list[list.length - 1], ...list, list[0]] as MainListResult[])
+      : [];
 
   useEffect(() => {
     if (isTransitioning.current) {
@@ -55,7 +58,7 @@ const MiniCarouselSection: FC<MiniCarouselSectionProps> = ({ list, label }) => {
             ref={carouselRef}
             style={slideTransformStyle}
           >
-            {extenedList.map((item: any, idx: number) => (
+            {extenedList.map((item: MainListResult, idx: number) => (
               <div
                 key={item.id ? `movie-${item.id}` : `clone-${idx}`}
                 className="mini-slide-item"

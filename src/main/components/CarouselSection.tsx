@@ -1,9 +1,10 @@
 import { FC, useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
 import { IMG_BASE_URL } from "../../apis/config";
+import { MainListResult } from "../Main.type";
 
 interface CarouselSectionProps {
-  movieList: any[];
+  movieList: MainListResult[];
 }
 
 const CarouselSection: FC<CarouselSectionProps> = ({ movieList }) => {
@@ -15,7 +16,7 @@ const CarouselSection: FC<CarouselSectionProps> = ({ movieList }) => {
     movieList[movieList.length - 1],
     ...movieList,
     movieList[0],
-  ];
+  ] as MainListResult[];
 
   useEffect(() => {
     if (isTransitioning.current) {
@@ -54,7 +55,7 @@ const CarouselSection: FC<CarouselSectionProps> = ({ movieList }) => {
         style={slideTransformStyle}
         ref={carouselRef}
       >
-        {extendedMovieList.map((movie: any, idx: number) => (
+        {extendedMovieList.map((movie: MainListResult, idx: number) => (
           <div key={idx} className="slide-item">
             <Link to={`/contents/${movie.id}`} state={{ type: "movie" }}>
               <img

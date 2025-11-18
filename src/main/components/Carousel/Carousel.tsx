@@ -9,9 +9,10 @@ import React, {
 } from "react";
 import { Link } from "react-router";
 import { IMG_BASE_URL } from "../../../apis/config";
+import { MainListResult } from "../../Main.type";
 
 interface CarouselContextProps {
-  extendedMovieList: any[];
+  extendedMovieList: MainListResult[];
   slideTransformStyle: React.CSSProperties;
   moveCarousel: (direction: number) => void;
 }
@@ -24,7 +25,7 @@ const Track: FC = () => {
 
   return (
     <div className="slide-container" style={slideTransformStyle}>
-      {extendedMovieList.map((movie: any, idx: number) => (
+      {extendedMovieList.map((movie: MainListResult, idx: number) => (
         <div key={idx} className="slide-item">
           <Link to={`/contents/${movie.id}`} state={{ type: "movie" }}>
             <img
@@ -62,7 +63,7 @@ const NextButton: FC = () => {
 };
 
 interface CarouselProps {
-  movieList: any[];
+  movieList: MainListResult[] | [];
   children: ReactNode;
 }
 
@@ -83,7 +84,7 @@ const Carousel: CarouselComponent = ({
     movieList[movieList.length - 1],
     ...movieList,
     movieList[0],
-  ];
+  ] as MainListResult[];
 
   useEffect(() => {
     if (isTransitioning.current) {
