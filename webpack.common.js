@@ -8,7 +8,7 @@ module.exports = {
   entry: "./src/index.tsx", // 엔트리 포인트 설정
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: "bundle.js", // 번들된 파일의 이름
+    filename: "bundle.[contenthash].js", // 번들된 파일의 이름
   },
   resolve: {
     extensions: [".js", ".jsx", ".ts", ".tsx"], // import 시 확장자를 생략할 수 있게 해줍니다.
@@ -34,7 +34,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: "./public/index.html", // 템플릿 파일 경로
-      filename: "index.html", // 생성될 HTML 파일 이름
+      filename: "index.[contenthash].html", // 생성될 HTML 파일 이름
       inject: "body", // 스크립트를 body 태그 끝에 삽입
     }),
     new Dotenv({
