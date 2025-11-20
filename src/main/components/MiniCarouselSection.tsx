@@ -1,98 +1,76 @@
-import { FC, useEffect, useRef, useState } from "react";
+import { FC, Suspense, useRef } from "react";
 import { IMG_BASE_URL } from "../../apis/config";
 import { Link } from "react-router";
+import { MainListResult } from "../Main.type";
+import { useCarousel } from "../../hooks/useCarousel";
 
 interface MiniCarouselSectionProps {
-  list: any[];
+  list: MainListResult[];
   label?: string;
 }
 
 const MiniCarouselSection: FC<MiniCarouselSectionProps> = ({ list, label }) => {
-  const [currentIndex, setCurrentIndex] = useState(1);
-  const isTransitioning = useRef(false);
+  const { moveCarousel, slideTransformStyle } = useCarousel({
+    movieListLength: list.length,
+  });
   const carouselRef = useRef(null);
 
   const extenedList =
-    list.length > 0 ? [list[list.length - 1], ...list, list[0]] : [];
+    list.length > 0
+      ? ([list[list.length - 1], ...list, list[0]] as MainListResult[])
+      : [];
 
-  useEffect(() => {
-    if (isTransitioning.current) {
-      const timer = setTimeout(() => {
-        isTransitioning.current = false;
-        if (currentIndex >= list.length + 1) {
-          setCurrentIndex(1);
-        } else if (currentIndex <= 0) {
-          setCurrentIndex(list.length);
-        }
-      }, 300);
-      return () => clearTimeout(timer);
-    }
-  }, [currentIndex, list.length]);
-
-  const moveCarousel = (direction: number) => {
-    if (!isTransitioning.current) {
-      isTransitioning.current = true;
-      setCurrentIndex((prevIndex) => prevIndex + direction);
-    }
-  };
-
-  const slideTransformStyle = {
-    transform: `translateX(-${currentIndex * 100}%)`,
-    transition: isTransitioning.current ? "transform 0.3s ease-in-out" : "none",
-  };
-
-  if (!list || list.length === 0) {
-    return <section className="mini-carousel-container">Loading...</section>;
-  }
+  const fallbackContent = (
+    <section className="mini-carousel-container">Loading...</section>
+  );
 
   return (
-    <div className="mini-carousel-wrapper">
-      <section className="mini-carousel-container">
-        <h2 className="mini-carousel-label">{label}</h2>
-        <div
-          className="mini-slide-container"
-          ref={carouselRef}
-          style={slideTransformStyle}
-        >
-          {extenedList.map((item: any, idx: number) => (
-            <div
-              key={item.id ? `movie-${item.id}` : `clone-${idx}`}
-              className="mini-slide-item"
-            >
-              <Link
-                to={`/contents/${item.id}`}
-                state={{ type: "tv" }}
-                className="mini-carousel-card"
-              >
-                <div className="mini-poster-wrapper">
-                  <img
-                    src={`${IMG_BASE_URL}${item.poster_path}`}
-                    alt={item.title}
-                    loading="lazy"
-                    className="mini-carousel-image"
-                  />
-                  <div className="card-overlay">
-                    <h3
-                      className="card-logo"
-                      style={{ fontSize: "20px", fontWeight: "bold" }}
-                    >
-                      {item.title}
-                    </h3>
-                    <p className="card-description">{item.overview}</p>
+    <Suspense fallback={fallbackContent}>
+      <div className="mini-carousel-wrapper">
+        <section className="mini-carousel-container">
+          <h2 className="mini-carousel-label">{label}</h2>
+          <div
+            className="mini-slide-container"
+            ref={carouselRef}
+            style={slideTransformStyle}
+          >
+            {extenedList.map((item: MainListResult) => (
+              <div key={item.id} className="mini-slide-item">
+                <Link
+                  to={`/contents/${item.id}`}
+                  state={{ type: "tv" }}
+                  className="mini-carousel-card"
+                >
+                  <div className="mini-poster-wrapper">
+                    <img
+                      src={`${IMG_BASE_URL}${item.poster_path}`}
+                      alt={item.title}
+                      loading="lazy"
+                      className="mini-carousel-image"
+                    />
+                    <div className="card-overlay">
+                      <h3
+                        className="card-logo"
+                        style={{ fontSize: "20px", fontWeight: "bold" }}
+                      >
+                        {item.title}
+                      </h3>
+                      <p className="card-description">{item.overview}</p>
+                    </div>
                   </div>
-                </div>
-              </Link>
-            </div>
-          ))}
-        </div>
-        <button onClick={() => moveCarousel(-1)} className="nav-button left">
-          <span>❮</span>
-        </button>
-        <button onClick={() => moveCarousel(1)} className="nav-button right">
-          <span>❯</span>
-        </button>
-      </section>
-    </div>
+                </Link>
+              </div>
+            ))}
+          </div>
+          <button onClick={() => moveCarousel(-1)} className="nav-button left">
+            <span>❮</span>
+          </button>
+          <button onClick={() => moveCarousel(1)} className="nav-button right">
+            <span>❯</span>
+          </button>
+        </section>
+      </div>
+    </Suspense>
   );
 };
 

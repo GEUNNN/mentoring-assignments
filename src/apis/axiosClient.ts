@@ -1,59 +1,37 @@
 import instance from "./axiosInstance";
 
-export const getMainList = async () => {
-  const response = await instance.get("/trending/movie/day?language=en-US");
-  return response.data;
-};
+export const getMainList = () =>
+  instance.get("/trending/all/day?language=en-US").then((res) => res.data);
 
-export const getSearchList = async (keyword: string) => {
-  const response = await instance.get(`/search/movie?query=${keyword}`);
-  return response.data;
-};
+export const getSearchList = (keyword: string) =>
+  instance.get(`/search/movie?query=${keyword}`).then((res) => res.data);
 
-export const getDetailList = async (id: string) => {
-  const response = await instance.get(`/movie/${id}`);
-  return response.data;
-};
+export const getDetailList = (id: string) =>
+  instance.get(`/movie/${id}`).then((res) => res.data);
 
-export const getTvList = async (id: string) => {
-  const response = await instance.get(`/tv/${id}`);
-  return response.data;
-};
+export const getTvList = (id: string) =>
+  instance.get(`/tv/${id}`).then((res) => res.data);
 
-export const getGenreList = async () => {
-  const response = await instance.get(`/genre/movie/list?language=en`);
-  return response.data;
-};
+export const getGenreList = () =>
+  instance.get(`/genre/movie/list?language=en`).then((res) => res.data);
 
-export const postFavorite = async (movieId: number) => {
-  const response = await instance.post(
-    `/account/${process.env.ACCOUNT_ID}/favorite`,
-    {
+export const postFavorite = (movieId: number) =>
+  instance
+    .post(`/account/${process.env.ACCOUNT_ID}/favorite`, {
       media_type: "movie",
       media_id: movieId,
       favorite: true,
-    }
-  );
+    })
+    .then((res) => res.data);
 
-  return response.data;
-};
+export const getCredits = (id: string) =>
+  instance.get(`/movie/${id}/credits`).then((res) => res.data);
 
-export const getCredits = async (id: string) => {
-  const response = await instance.get(`/movie/${id}/credits`);
-  return response.data;
-};
+export const getReviewList = (id: string) =>
+  instance.get(`/movie/${id}/reviews`).then((res) => res.data);
 
-export const getReviewList = async (id: string) => {
-  const response = await instance.get(`/movie/${id}/reviews`);
-  return response.data;
-};
+export const getAiringTodayTVShows = () =>
+  instance.get(`/tv/airing_today`).then((res) => res.data);
 
-export const getAiringTodayTVShows = async () => {
-  const response = await instance.get(`/tv/airing_today`);
-  return response.data;
-};
-
-export const getUpcomingMovies = async () => {
-  const response = await instance.get(`/movie/upcoming`);
-  return response.data;
-};
+export const getUpcomingMovies = () =>
+  instance.get(`/movie/upcoming`).then((res) => res.data);

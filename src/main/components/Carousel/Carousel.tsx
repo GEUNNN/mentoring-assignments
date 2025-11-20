@@ -2,16 +2,16 @@ import React, {
   createContext,
   FC,
   ReactNode,
+  Suspense,
   useContext,
-  useEffect,
-  useRef,
-  useState,
 } from "react";
 import { Link } from "react-router";
 import { IMG_BASE_URL } from "../../../apis/config";
+import { MainListResult } from "../../Main.type";
+import { useCarousel } from "../../../hooks/useCarousel";
 
 interface CarouselContextProps {
-  extendedMovieList: any[];
+  extendedMovieList: MainListResult[];
   slideTransformStyle: React.CSSProperties;
   moveCarousel: (direction: number) => void;
 }
@@ -24,8 +24,8 @@ const Track: FC = () => {
 
   return (
     <div className="slide-container" style={slideTransformStyle}>
-      {extendedMovieList.map((movie: any, idx: number) => (
-        <div key={idx} className="slide-item">
+      {extendedMovieList.map((movie: MainListResult) => (
+        <div key={movie.id} className="slide-item">
           <Link to={`/contents/${movie.id}`} state={{ type: "movie" }}>
             <img
               src={`${IMG_BASE_URL}${movie.poster_path}`}
@@ -62,7 +62,7 @@ const NextButton: FC = () => {
 };
 
 interface CarouselProps {
-  movieList: any[];
+  movieList: MainListResult[] | [];
   children: ReactNode;
 }
 
@@ -76,39 +76,15 @@ const Carousel: CarouselComponent = ({
   movieList,
   children,
 }: CarouselProps) => {
-  const [currentIndex, setCurrentIndex] = useState(1);
-  const isTransitioning = useRef(false);
+  const { moveCarousel, slideTransformStyle } = useCarousel({
+    movieListLength: movieList.length,
+  });
 
   const extendedMovieList = [
     movieList[movieList.length - 1],
     ...movieList,
     movieList[0],
-  ];
-
-  useEffect(() => {
-    if (isTransitioning.current) {
-      const timer = setTimeout(() => {
-        isTransitioning.current = false;
-        if (currentIndex >= movieList.length + 1) {
-          setCurrentIndex(1);
-        } else if (currentIndex <= 0) {
-          setCurrentIndex(movieList.length);
-        }
-      }, 300);
-      return () => clearTimeout(timer);
-    }
-  }, [currentIndex, movieList.length]);
-
-  const moveCarousel = (direction: number) => {
-    if (isTransitioning.current) return;
-    isTransitioning.current = true;
-    setCurrentIndex((prevIndex) => prevIndex + direction);
-  };
-
-  const slideTransformStyle = {
-    transform: `translateX(-${currentIndex * 100}%)`,
-    transition: isTransitioning.current ? "transform 0.3s ease-in-out" : "none",
-  };
+  ] as MainListResult[];
 
   const value = {
     extendedMovieList,
@@ -121,9 +97,11 @@ const Carousel: CarouselComponent = ({
   }
 
   return (
-    <CarouselContext.Provider value={value}>
-      <section className="carousel-container">{children}</section>
-    </CarouselContext.Provider>
+    <Suspense fallback={<div>Loading carousel...</div>}>
+      <CarouselContext.Provider value={value}>
+        <section className="carousel-container">{children}</section>
+      </CarouselContext.Provider>
+    </Suspense>
   );
 };
 

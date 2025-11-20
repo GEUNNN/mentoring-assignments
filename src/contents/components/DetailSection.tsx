@@ -45,7 +45,7 @@ const DetailSection: FC<DetailProps> = ({ detail, postFavorite }) => {
         </div>
         <div className="detail-actions-wrapper">
           <ul className="action-button-list">
-            <li className="action-button-item" onClick={() => postFavorite()}>
+            <li className="action-button-item" onClick={postFavorite}>
               <span className="icon">🤍</span>
               <span className="label">보고싶어요</span>
             </li>

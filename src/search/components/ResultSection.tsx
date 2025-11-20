@@ -13,7 +13,7 @@ const ResultSection: React.FC<ResultSectionProps> = ({
 }) => {
   return (
     <section className="search-results-container">
-      {searchResults?.map(
+      {searchResults.map(
         ({
           id,
           title,
