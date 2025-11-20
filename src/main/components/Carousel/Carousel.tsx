@@ -1,4 +1,10 @@
-import React, { createContext, FC, ReactNode, useContext } from "react";
+import React, {
+  createContext,
+  FC,
+  ReactNode,
+  Suspense,
+  useContext,
+} from "react";
 import { Link } from "react-router";
 import { IMG_BASE_URL } from "../../../apis/config";
 import { MainListResult } from "../../Main.type";
@@ -91,9 +97,11 @@ const Carousel: CarouselComponent = ({
   }
 
   return (
-    <CarouselContext.Provider value={value}>
-      <section className="carousel-container">{children}</section>
-    </CarouselContext.Provider>
+    <Suspense fallback={<div>Loading carousel...</div>}>
+      <CarouselContext.Provider value={value}>
+        <section className="carousel-container">{children}</section>
+      </CarouselContext.Provider>
+    </Suspense>
   );
 };
 

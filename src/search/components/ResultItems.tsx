@@ -19,7 +19,11 @@ const ResultItems: React.FC<ResultItemProps> = ({
   voteAverage,
 }) => {
   return (
-    <Link className="result-item-container" to={`/contents/${id}`}>
+    <Link
+      className="result-item-container"
+      to={`/contents/${id}`}
+      state={{ type: "movie" }}
+    >
       <img
         className="result-movie-poster"
         src={`${IMG_BASE_URL}${image}`}

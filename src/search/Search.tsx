@@ -1,4 +1,4 @@
-import React, { useDeferredValue, useState } from "react";
+import React, { Suspense, useDeferredValue, useState } from "react";
 import Header from "../components/Header";
 import "./Search.css";
 import ResultSection from "./components/ResultSection";
@@ -15,10 +15,12 @@ const Search: React.FC = () => {
   return (
     <div className="app-container">
       <Header isSearchPage={true} setKeyword={setKeyword} />
-      <ResultSection
-        searchResults={searchList?.results || []}
-        keyword={keyword}
-      />
+      <Suspense fallback={<div>Loading search results...</div>}>
+        <ResultSection
+          searchResults={searchList?.results || []}
+          keyword={keyword}
+        />
+      </Suspense>
       {!searchList?.results.length && (
         <GenreSection genres={genreList?.genres || []} />
       )}
