@@ -1,5 +1,4 @@
 import { FC, useRef } from "react";
-import { Link } from "react-router";
 import { IMG_BASE_URL } from "../../apis/config";
 import { MainListResult } from "../Main.type";
 import { useCarousel } from "../../hooks/useCarousel";
@@ -9,7 +8,7 @@ interface CarouselSectionProps {
 }
 
 const CarouselSection: FC<CarouselSectionProps> = ({ movieList }) => {
-  const { moveCarousel, slideTransformStyle } = useCarousel({
+  const { moveCarousel, slideTransformStyle, handleClickItem } = useCarousel({
     movieListLength: movieList.length,
   });
   const carouselRef = useRef(null);
@@ -32,14 +31,16 @@ const CarouselSection: FC<CarouselSectionProps> = ({ movieList }) => {
         ref={carouselRef}
       >
         {extendedMovieList.map((movie: MainListResult) => (
-          <div key={movie.id} className="slide-item">
-            <Link to={`/contents/${movie.id}`} state={{ type: "movie" }}>
-              <img
-                src={`${IMG_BASE_URL}${movie.poster_path}`}
-                alt={movie.title}
-                className="movie-poster"
-              />
-            </Link>
+          <div
+            key={movie.id}
+            className="slide-item"
+            onClick={() => handleClickItem(movie.id, "movie")}
+          >
+            <img
+              src={`${IMG_BASE_URL}${movie.poster_path}`}
+              alt={movie.title}
+              className="movie-poster"
+            />
           </div>
         ))}
       </div>
