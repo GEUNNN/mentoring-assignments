@@ -1,4 +1,8 @@
 const path = require("path");
+const {
+  defineReactCompilerLoaderOption,
+  reactCompilerLoader,
+} = require("react-compiler-webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 const Dotenv = require("dotenv-webpack");
@@ -18,9 +22,17 @@ module.exports = {
       {
         test: /\.(js|jsx|ts|tsx)$/, // .js 또는 .jsx 확장자를 가진 파일에 대해
         exclude: /node_modules\/(?!@tanstack\/react-query)/,
-        use: {
-          loader: "babel-loader", // Babel 로더를 사용하여 ES6+와 JSX 문법을 변환합니다.
-        },
+        use: [
+          {
+            loader: "babel-loader", // Babel 로더를 사용하여 ES6+와 JSX 문법을 변환합니다.
+          },
+          {
+            loader: reactCompilerLoader,
+            options: defineReactCompilerLoaderOption({
+              // React Compiler options goes here
+            }),
+          },
+        ],
       },
       {
         test: /\.(png|jpe?g|gif|svg|webp|ico)$/i, // Added webp and ico
