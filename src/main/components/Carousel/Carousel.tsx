@@ -5,7 +5,6 @@ import React, {
   Suspense,
   useContext,
 } from "react";
-import { Link } from "react-router";
 import { IMG_BASE_URL } from "../../../apis/config";
 import { MainListResult } from "../../Main.type";
 import { useCarousel } from "../../../hooks/useCarousel";
@@ -14,25 +13,28 @@ interface CarouselContextProps {
   extendedMovieList: MainListResult[];
   slideTransformStyle: React.CSSProperties;
   moveCarousel: (direction: number) => void;
+  handleClickItem: (id: number, type: "movie" | "tv") => void;
 }
 
 const CarouselContext = createContext<CarouselContextProps | null>(null);
 
 const Track: FC = () => {
   const context = useContext(CarouselContext)!;
-  const { extendedMovieList, slideTransformStyle } = context;
+  const { extendedMovieList, slideTransformStyle, handleClickItem } = context;
 
   return (
     <div className="slide-container" style={slideTransformStyle}>
       {extendedMovieList.map((movie: MainListResult) => (
-        <div key={movie.id} className="slide-item">
-          <Link to={`/contents/${movie.id}`} state={{ type: "movie" }}>
-            <img
-              src={`${IMG_BASE_URL}${movie.poster_path}`}
-              alt={movie.title}
-              className="movie-poster"
-            />
-          </Link>
+        <div
+          key={movie.id}
+          className="slide-item"
+          onClick={() => handleClickItem(movie.id, "movie")}
+        >
+          <img
+            src={`${IMG_BASE_URL}${movie.poster_path}`}
+            alt={movie.title}
+            className="movie-poster"
+          />
         </div>
       ))}
     </div>
@@ -76,7 +78,7 @@ const Carousel: CarouselComponent = ({
   movieList,
   children,
 }: CarouselProps) => {
-  const { moveCarousel, slideTransformStyle } = useCarousel({
+  const { moveCarousel, slideTransformStyle, handleClickItem } = useCarousel({
     movieListLength: movieList.length,
   });
 
@@ -90,6 +92,7 @@ const Carousel: CarouselComponent = ({
     extendedMovieList,
     slideTransformStyle,
     moveCarousel,
+    handleClickItem,
   };
 
   if (!movieList || movieList.length === 0) {

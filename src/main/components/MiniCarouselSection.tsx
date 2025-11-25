@@ -1,6 +1,5 @@
 import { FC, Suspense, useRef } from "react";
 import { IMG_BASE_URL } from "../../apis/config";
-import { Link } from "react-router";
 import { MainListResult } from "../Main.type";
 import { useCarousel } from "../../hooks/useCarousel";
 
@@ -10,7 +9,7 @@ interface MiniCarouselSectionProps {
 }
 
 const MiniCarouselSection: FC<MiniCarouselSectionProps> = ({ list, label }) => {
-  const { moveCarousel, slideTransformStyle } = useCarousel({
+  const { moveCarousel, slideTransformStyle, handleClickItem } = useCarousel({
     movieListLength: list.length,
   });
   const carouselRef = useRef(null);
@@ -36,9 +35,8 @@ const MiniCarouselSection: FC<MiniCarouselSectionProps> = ({ list, label }) => {
           >
             {extenedList.map((item: MainListResult) => (
               <div key={item.id} className="mini-slide-item">
-                <Link
-                  to={`/contents/${item.id}`}
-                  state={{ type: "tv" }}
+                <div
+                  onClick={() => handleClickItem(item.id, "tv")}
                   className="mini-carousel-card"
                 >
                   <div className="mini-poster-wrapper">
@@ -58,7 +56,7 @@ const MiniCarouselSection: FC<MiniCarouselSectionProps> = ({ list, label }) => {
                       <p className="card-description">{item.overview}</p>
                     </div>
                   </div>
-                </Link>
+                </div>
               </div>
             ))}
           </div>
