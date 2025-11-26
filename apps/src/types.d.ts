@@ -1,0 +1,40 @@
+declare namespace NodeJS {
+  interface ProcessEnv {
+    REACT_APP_API_URL: string;
+    GOOGLE_MAP_API: string;
+    S3_API: string;
+    ACCESS_TOKEN: string;
+    API_KEY: string;
+    ACCOUNT_ID: string;
+  }
+}
+
+declare module "*.png" {
+  const content: string;
+  export default content;
+}
+
+declare module "*.svg" {
+  const content: string;
+  export default content;
+}
+
+declare module "*.jpg" {
+  const content: string;
+  export default content;
+}
+
+declare module "*.jpeg" {
+  const content: string;
+  export default content;
+}
+
+declare module "*.gif" {
+  const content: string;
+  export default content;
+}
+
+declare module "*.css" {
+  const classes: { [key: string]: string };
+  export default classes;
+}
