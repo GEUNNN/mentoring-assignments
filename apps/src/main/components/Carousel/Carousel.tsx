@@ -6,11 +6,11 @@ import React, {
   useContext,
 } from "react";
 import { IMG_BASE_URL } from "../../../apis/config";
-import { MainListResult } from "../../Main.type";
+import { MainItem } from "../../Main.type";
 import { useCarousel } from "../../../hooks/useCarousel";
 
 interface CarouselContextProps {
-  extendedMovieList: MainListResult[];
+  extendedMovieList: MainItem[];
   slideTransformStyle: React.CSSProperties;
   moveCarousel: (direction: number) => void;
   handleClickItem: (id: number, type: "movie" | "tv") => void;
@@ -24,7 +24,7 @@ const Track: FC = () => {
 
   return (
     <div className="slide-container" style={slideTransformStyle}>
-      {extendedMovieList.map((movie: MainListResult) => (
+      {extendedMovieList.map((movie: MainItem) => (
         <div
           key={movie.id}
           className="slide-item"
@@ -64,8 +64,9 @@ const NextButton: FC = () => {
 };
 
 interface CarouselProps {
-  movieList: MainListResult[] | [];
+  movieList: MainItem[] | [];
   children: ReactNode;
+  handleClickItem: (id: number, type: "movie" | "tv") => void;
 }
 
 type CarouselComponent = FC<CarouselProps> & {
@@ -77,8 +78,9 @@ type CarouselComponent = FC<CarouselProps> & {
 const Carousel: CarouselComponent = ({
   movieList,
   children,
+  handleClickItem,
 }: CarouselProps) => {
-  const { moveCarousel, slideTransformStyle, handleClickItem } = useCarousel({
+  const { moveCarousel, slideTransformStyle } = useCarousel({
     movieListLength: movieList.length,
   });
 
@@ -86,7 +88,7 @@ const Carousel: CarouselComponent = ({
     movieList[movieList.length - 1],
     ...movieList,
     movieList[0],
-  ] as MainListResult[];
+  ] as MainItem[];
 
   const value = {
     extendedMovieList,
