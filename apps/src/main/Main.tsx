@@ -8,8 +8,10 @@ import {
 } from "../query/query";
 import MiniCarouselSection from "./components/MiniCarouselSection";
 import Carousel from "./components/Carousel/Carousel";
+import { useNavigate } from "react-router";
 
 const Main: FC = () => {
+  const navigate = useNavigate();
   const { data: mainList } = useQueryGetMainList();
   const { data: airingTodayList } = useQueryGetAiringTodayTVShows();
   const { data: upcomingList } = useQueryGetUpcomingMovies();
@@ -18,16 +20,29 @@ const Main: FC = () => {
   const tvShowsArray = airingTodayList?.results || [];
   const upcomingListArray = upcomingList?.results || [];
 
+  const handleClickItem = (id: number, type: "movie" | "tv") => {
+    console.log("type >>>", type);
+    navigate(`/contents/${id}`, { state: type });
+  };
+
   return (
     <div className="app-container">
       <Header isSearchPage={false} />
-      <Carousel movieList={movieList}>
+      <Carousel movieList={movieList} handleClickItem={handleClickItem}>
         <Carousel.Track />
         <Carousel.PrevButton />
         <Carousel.NextButton />
       </Carousel>
-      <MiniCarouselSection label="Tv show" list={tvShowsArray} />
-      <MiniCarouselSection label="Upcoming Movies" list={upcomingListArray} />
+      <MiniCarouselSection
+        label="Tv show"
+        list={tvShowsArray}
+        handleClickItem={handleClickItem}
+      />
+      <MiniCarouselSection
+        label="Upcoming Movies"
+        list={upcomingListArray}
+        handleClickItem={handleClickItem}
+      />
     </div>
   );
 };

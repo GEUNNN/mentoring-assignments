@@ -5,9 +5,10 @@ import React, {
   Suspense,
   useContext,
 } from "react";
-import { IMG_BASE_URL } from "../../../apis/config";
-import { MainItem } from "../../Main.type";
-import { useCarousel } from "../../../hooks/useCarousel";
+import { useCarousel } from "./hooks/useCarousel";
+import { MainItem } from "./Carousel.type";
+
+export const IMG_BASE_URL = "https://image.tmdb.org/t/p/w500";
 
 interface CarouselContextProps {
   extendedMovieList: MainItem[];

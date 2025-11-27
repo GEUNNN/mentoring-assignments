@@ -1,22 +1,27 @@
 import { FC, Suspense, useRef } from "react";
 import { IMG_BASE_URL } from "../../apis/config";
-import { MainListResult } from "../Main.type";
+import { MainItem } from "../Main.type";
 import { useCarousel } from "../../hooks/useCarousel";
 
 interface MiniCarouselSectionProps {
-  list: MainListResult[];
+  list: MainItem[];
   label?: string;
+  handleClickItem: (id: number, type: "movie" | "tv") => void;
 }
 
-const MiniCarouselSection: FC<MiniCarouselSectionProps> = ({ list, label }) => {
-  const { moveCarousel, slideTransformStyle, handleClickItem } = useCarousel({
+const MiniCarouselSection: FC<MiniCarouselSectionProps> = ({
+  list,
+  label,
+  handleClickItem,
+}) => {
+  const { moveCarousel, slideTransformStyle } = useCarousel({
     movieListLength: list.length,
   });
   const carouselRef = useRef(null);
 
   const extenedList =
     list.length > 0
-      ? ([list[list.length - 1], ...list, list[0]] as MainListResult[])
+      ? ([list[list.length - 1], ...list, list[0]] as MainItem[])
       : [];
 
   const fallbackContent = (
@@ -33,7 +38,7 @@ const MiniCarouselSection: FC<MiniCarouselSectionProps> = ({ list, label }) => {
             ref={carouselRef}
             style={slideTransformStyle}
           >
-            {extenedList.map((item: MainListResult) => (
+            {extenedList.map((item: MainItem) => (
               <div key={item.id} className="mini-slide-item">
                 <div
                   onClick={() => handleClickItem(item.id, "tv")}
