@@ -14,8 +14,8 @@ const Contents: React.FC = () => {
   const { id } = useParams();
   const location = useLocation();
 
-  const isMovie = location.state?.type === "movie";
-  const isTv = location.state?.type === "tv";
+  const isMovie = location.state === "movie";
+  const isTv = location.state === "tv";
 
   const { data: movieDetail } = useQueryGetDetailList(id!, isMovie);
   const { data: tvDetail } = useQueryGetDetailList(id!, isTv);
