@@ -12,7 +12,7 @@ importers:
     dependencies:
       '@repo/ui':
         specifier: workspace:*
-        version: link:../packages
+        version: link:../packages/ui
       '@tanstack/react-query':
         specifier: ^5.90.2
         version: 5.90.12(react@19.2.1)
@@ -144,8 +144,7 @@ importers:
         specifier: ^6.0.1
         version: 6.0.1
 
-  packages:
-
+  packages/ui:
     dependencies:
       react:
         specifier: ^19.2.0
@@ -153,7 +152,6 @@ importers:
       typescript:
         specifier: ^5.9.3
         version: 5.9.3
-
     devDependencies:
       '@types/react':
         specifier: ^19.2.7
