@@ -8,11 +8,11 @@ importers:
 
   .: {}
 
-  apps:
+  apps/watcha:
     dependencies:
       '@repo/ui':
         specifier: workspace:*
-        version: link:../packages/ui
+        version: link:../../packages/ui
       '@tanstack/react-query':
         specifier: ^5.90.2
         version: 5.90.12(react@19.2.1)
