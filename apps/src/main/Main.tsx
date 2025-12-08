@@ -7,7 +7,7 @@ import {
   useQueryGetUpcomingMovies,
 } from "../query/query";
 import MiniCarouselSection from "./components/MiniCarouselSection";
-import Carousel from "./components/Carousel/Carousel";
+import { Carousel } from "@repo/ui";
 import { useNavigate } from "react-router";
 
 const Main: FC = () => {
