@@ -7,6 +7,9 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 module.exports = merge(common, {
   mode: "production",
   devtool: "hidden-source-map",
+  output: {
+    filename: "[name].[contenthash].js",
+  },
   module: {
     rules: [
       {
