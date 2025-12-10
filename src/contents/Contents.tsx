@@ -35,7 +35,9 @@ const Contents: React.FC = () => {
     <div className="content-container">
       <Header isSearchPage={false} />
       <DetailSection detail={detail} postFavorite={postFavorite} />
-      <CastSection castMembers={castMembers} crewMembers={crewMembers} />
+      {castMembers && (
+        <CastSection castMembers={castMembers} crewMembers={crewMembers} />
+      )}
       <ReviewSection reviewShowing={reviewShowing} />
     </div>
   );
