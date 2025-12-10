@@ -36,7 +36,12 @@ const MiniCarouselSection: FC<MiniCarouselSectionProps> = ({ list, label }) => {
             {extenedList.map((item: MainListResult) => (
               <div key={item.id} className="mini-slide-item">
                 <div
-                  onClick={() => handleClickItem(item.id, "tv")}
+                  onClick={() =>
+                    handleClickItem(
+                      item.id,
+                      item.video === false ? "movie" : "tv"
+                    )
+                  }
                   className="mini-carousel-card"
                 >
                   <div className="mini-poster-wrapper">

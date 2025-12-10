@@ -14,13 +14,9 @@ const Contents: React.FC = () => {
   const { id } = useParams();
   const location = useLocation();
 
-  const isMovie = location.state?.type === "movie";
-  const isTv = location.state?.type === "tv";
+  const isMovie = location.state === "movie";
 
-  const { data: movieDetail } = useQueryGetDetailList(id!, isMovie);
-  const { data: tvDetail } = useQueryGetDetailList(id!, isTv);
-
-  const detail = isMovie ? movieDetail : tvDetail;
+  const { data: detail } = useQueryGetDetailList(id!, isMovie ? "movie" : "tv");
 
   const { mutate: postFavorite } = useMutationPostFavorite(Number(id));
 
