@@ -21,8 +21,8 @@ export const postFavorite = (movieId: number) =>
     })
     .then((res) => res.data);
 
-export const getCredits = (id: string) =>
-  instance.get(`/movie/${id}/credits`).then((res) => res.data);
+export const getCredits = (id: string, type: "movie" | "tv") =>
+  instance.get(`/${type}/${id}/credits`).then((res) => res.data);
 
 export const getReviewList = (id: string) =>
   instance.get(`/movie/${id}/reviews`).then((res) => res.data);

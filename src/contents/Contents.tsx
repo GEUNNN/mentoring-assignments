@@ -20,7 +20,7 @@ const Contents: React.FC = () => {
 
   const { mutate: postFavorite } = useMutationPostFavorite(Number(id));
 
-  const { data: credits } = useQueryGetCredits(id!);
+  const { data: credits } = useQueryGetCredits(id!, isMovie ? "movie" : "tv");
   const { cast, crew } = credits || {};
   const castMembers = useMemo(() => cast?.slice(0, 5), [cast]);
   const crewMembers = useMemo(() => crew?.slice(0, 5), [crew]);
