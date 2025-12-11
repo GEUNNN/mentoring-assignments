@@ -6,7 +6,6 @@ import {
   getGenreList,
   getUpcomingMovies,
   getAiringTodayTVShows,
-  getTvList,
 } from "../apis/axiosClient";
 import { queryKey } from "./query-key";
 
@@ -23,18 +22,11 @@ export const useQueryGetSearchList = (keyword: string) =>
     queryFn: () => getSearchList(keyword),
   });
 
-export const useQueryGetDetailList = (id: string, enabled: boolean) =>
+export const useQueryGetDetailList = (id: string, type: "movie" | "tv") =>
   useQuery({
     queryKey: queryKey.detailList(id),
-    queryFn: () => getDetailList(id),
-    enabled: enabled,
-  });
-
-export const useQueryGetTvList = (id: string, enabled: boolean) =>
-  useQuery({
-    queryKey: queryKey.tvList(id),
-    queryFn: () => getTvList(id),
-    enabled: enabled,
+    queryFn: () => getDetailList(id, type),
+    enabled: !!id,
   });
 
 export const useQueryGetGenreList = () =>

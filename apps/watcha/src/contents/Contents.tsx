@@ -15,16 +15,12 @@ const Contents: React.FC = () => {
   const location = useLocation();
 
   const isMovie = location.state === "movie";
-  const isTv = location.state === "tv";
 
-  const { data: movieDetail } = useQueryGetDetailList(id!, isMovie);
-  const { data: tvDetail } = useQueryGetDetailList(id!, isTv);
-
-  const detail = isMovie ? movieDetail : tvDetail;
+  const { data: detail } = useQueryGetDetailList(id!, isMovie ? "movie" : "tv");
 
   const { mutate: postFavorite } = useMutationPostFavorite(Number(id));
 
-  const { data: credits } = useQueryGetCredits(id!);
+  const { data: credits } = useQueryGetCredits(id!, isMovie ? "movie" : "tv");
   const { cast, crew } = credits || {};
   const castMembers = useMemo(() => cast?.slice(0, 5), [cast]);
   const crewMembers = useMemo(() => crew?.slice(0, 5), [crew]);
@@ -39,7 +35,9 @@ const Contents: React.FC = () => {
     <div className="content-container">
       <Header isSearchPage={false} />
       <DetailSection detail={detail} postFavorite={postFavorite} />
-      <CastSection castMembers={castMembers} crewMembers={crewMembers} />
+      {castMembers && (
+        <CastSection castMembers={castMembers} crewMembers={crewMembers} />
+      )}
       <ReviewSection reviewShowing={reviewShowing} />
     </div>
   );

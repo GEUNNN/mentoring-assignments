@@ -6,11 +6,8 @@ export const getMainList = () =>
 export const getSearchList = (keyword: string) =>
   instance.get(`/search/movie?query=${keyword}`).then((res) => res.data);
 
-export const getDetailList = (id: string) =>
-  instance.get(`/movie/${id}`).then((res) => res.data);
-
-export const getTvList = (id: string) =>
-  instance.get(`/tv/${id}`).then((res) => res.data);
+export const getDetailList = (id: string, type: "movie" | "tv") =>
+  instance.get(`/${type}/${id}`).then((res) => res.data);
 
 export const getGenreList = () =>
   instance.get(`/genre/movie/list?language=en`).then((res) => res.data);
@@ -24,8 +21,8 @@ export const postFavorite = (movieId: number) =>
     })
     .then((res) => res.data);
 
-export const getCredits = (id: string) =>
-  instance.get(`/movie/${id}/credits`).then((res) => res.data);
+export const getCredits = (id: string, type: "movie" | "tv") =>
+  instance.get(`/${type}/${id}/credits`).then((res) => res.data);
 
 export const getReviewList = (id: string) =>
   instance.get(`/movie/${id}/reviews`).then((res) => res.data);
