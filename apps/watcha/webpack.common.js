@@ -10,6 +10,7 @@ const { DefinePlugin } = require("webpack");
 
 module.exports = {
   entry: "./src/index.tsx", // 엔트리 포인트 설정
+  target: "web",
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js", // 번들된 파일의 이름

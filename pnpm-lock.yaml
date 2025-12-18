@@ -10,6 +10,9 @@ importers:
 
   apps/watcha:
     dependencies:
+      '@repo/browserslist-config':
+        specifier: workspace:*
+        version: link:../../packages/browserslist-config
       '@repo/ui':
         specifier: workspace:*
         version: link:../../packages/ui
@@ -143,6 +146,12 @@ importers:
       webpack-merge:
         specifier: ^6.0.1
         version: 6.0.1
+
+  packages/browserslist-config:
+    dependencies:
+      '@naverpay/browserslist-config':
+        specifier: ^3.0.0
+        version: 3.0.0
 
   packages/ui:
     devDependencies:
@@ -806,6 +815,9 @@ packages:
 
   '@leichtgewicht/ip-codec@2.0.5':
     resolution: {integrity: sha512-Vo+PSpZG2/fmgmiNzYK9qWRh8h/CHrwD0mo1h1DzL4yzHNSfWYujGTYsWGreD000gcgmZ7K4Ys6Tx9TxtsKdDw==}
+
+  '@naverpay/browserslist-config@3.0.0':
+    resolution: {integrity: sha512-95ruZHCjifpUl1kb8b6lDX9DpigACMap9xQqkKT2ypxavxZSFlOY5fS002iLvwa8O8oY6DR1efQPJ6sF/zlbwA==}
 
   '@nicolo-ribaudo/chokidar-2@2.1.8-no-fsevents.3':
     resolution: {integrity: sha512-s88O1aVtXftvp5bCPB7WnmXc5IwOZZ7YPuwNPt+GtOOXpPvad1LfbmjYv+qII7zP6RU2QGnqve27dnLycEnyEQ==}
@@ -4204,6 +4216,8 @@ snapshots:
       '@jridgewell/sourcemap-codec': 1.5.5
 
   '@leichtgewicht/ip-codec@2.0.5': {}
+
+  '@naverpay/browserslist-config@3.0.0': {}
 
   '@nicolo-ribaudo/chokidar-2@2.1.8-no-fsevents.3':
     optional: true

@@ -1,0 +1,9 @@
+{
+  "name": "@repo/browserslist-config",
+  "version": "0.0.0",
+  "private": true,
+  "main": "index.js",
+  "dependencies": {
+    "@naverpay/browserslist-config": "^3.0.0"
+  }
+}
