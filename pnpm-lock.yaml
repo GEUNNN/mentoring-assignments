@@ -6,7 +6,11 @@ settings:
 
 importers:
 
-  .: {}
+  .:
+    devDependencies:
+      lint-staged:
+        specifier: ^16.2.7
+        version: 16.2.7
 
   apps/watcha:
     dependencies:

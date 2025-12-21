@@ -13,5 +13,8 @@
   "packageManager": "pnpm@10.23.0",
   "engines": {
     "node": ">=22"
+  },
+  "devDependencies": {
+    "lint-staged": "^16.2.7"
   }
 }
