@@ -1,4 +1,4 @@
-export interface MainListResult {
+export interface MainItem {
   adult: boolean;
   backdrop_path: string | null;
   id: number;
@@ -18,7 +18,7 @@ export interface MainListResult {
 
 export interface MainListResponse {
   page: number;
-  results: MainListResult[];
+  results: MainItem[];
   total_pages: number;
   total_results: number;
 }

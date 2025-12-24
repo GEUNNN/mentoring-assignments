@@ -1,12 +1,10 @@
 import { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router";
 
 interface UseCarouselProps {
   movieListLength: number;
 }
 
 export const useCarousel = ({ movieListLength }: UseCarouselProps) => {
-  const navigate = useNavigate();
   const [currentIndex, setCurrentIndex] = useState(1);
   const isTransitioning = useRef(false);
 
@@ -36,8 +34,5 @@ export const useCarousel = ({ movieListLength }: UseCarouselProps) => {
     transition: isTransitioning.current ? "transform 0.3s ease-in-out" : "none",
   };
 
-  const handleClickItem = (id: number, type: "movie" | "tv") =>
-    navigate(`/contents/${id}`, { state: type });
-
-  return { moveCarousel, slideTransformStyle, handleClickItem };
+  return { moveCarousel, slideTransformStyle };
 };
