@@ -63,5 +63,6 @@ module.exports = {
   devServer: {
     static: path.join(__dirname, "public"),
     compress: true,
+    historyApiFallback: true,
   },
 };
