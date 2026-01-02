@@ -12,47 +12,6 @@
   min-height: 100vh;
 }
 
-/* --- Main Carousel Styles --- */
-.carousel-container {
-  overflow: hidden;
-  height: 650px;
-  width: 90%;
-  max-width: 1400px;
-  margin: 0 auto; /* Centering the container */
-  position: relative; /* **FIX:** Sets the positioning context for buttons */
-}
-
-.slide-container {
-  display: flex;
-  height: 100%;
-  width: 100%;
-}
-
-.slide-item {
-  min-width: 100%; /* Still 100% for the main carousel */
-  flex-shrink: 0;
-  height: 100%;
-}
-
-.slide-item a {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  width: 100%;
-  text-decoration: none;
-}
-
-.movie-poster {
-  object-fit: cover;
-  border-radius: 8px;
-  max-width: 80vw;
-  max-height: 100%;
-  width: auto;
-  height: auto;
-  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.1);
-}
-
 /* --- Navigation Button Styles (Applied to both carousels) --- */
 .nav-button {
   position: absolute;
@@ -81,7 +40,6 @@
 }
 
 /* Show buttons on hover */
-.carousel-container:hover .nav-button,
 .mini-carousel-container:hover .nav-button {
   opacity: 1;
 }
