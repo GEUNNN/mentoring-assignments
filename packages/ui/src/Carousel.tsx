@@ -7,6 +7,7 @@ import React, {
 } from "react";
 import { useCarousel } from "./hooks/useCarousel";
 import { MainItem } from "./Carousel.type";
+import "./Carousel.css";
 
 export const IMG_BASE_URL = "https://image.tmdb.org/t/p/w500";
 
@@ -28,17 +29,17 @@ const Track: FC = () => {
   const { extendedMovieList, slideTransformStyle, handleClickItem } = context;
 
   return (
-    <div className="slide-container" style={slideTransformStyle}>
+    <div className="ui-slide-container" style={slideTransformStyle}>
       {extendedMovieList.map((movie: MainItem) => (
         <div
           key={movie.id}
-          className="slide-item"
+          className="ui-slide-item"
           onClick={() => handleClickItem(movie.id, "movie")}
         >
           <img
             src={`${IMG_BASE_URL}${movie.poster_path}`}
             alt={movie.title}
-            className="movie-poster"
+            className="ui-movie-poster"
           />
         </div>
       ))}
@@ -51,7 +52,7 @@ const PrevButton: FC = () => {
   const { moveCarousel } = context;
 
   return (
-    <button onClick={() => moveCarousel(-1)} className="nav-button left">
+    <button onClick={() => moveCarousel(-1)} className="ui-nav-button left">
       <span>❮</span>
     </button>
   );
@@ -62,7 +63,7 @@ const NextButton: FC = () => {
   const { moveCarousel } = context;
 
   return (
-    <button onClick={() => moveCarousel(1)} className="nav-button right">
+    <button onClick={() => moveCarousel(1)} className="ui-nav-button right">
       <span>❯</span>
     </button>
   );
@@ -103,13 +104,13 @@ const Carousel: CarouselComponent = ({
   };
 
   if (!movieList || movieList.length === 0) {
-    return <section className="carousel-container">Loading...</section>;
+    return <section className="ui-carousel-container">Loading...</section>;
   }
 
   return (
     <Suspense fallback={<div>Loading carousel...</div>}>
       <CarouselContext.Provider value={value}>
-        <section className="carousel-container">{children}</section>
+        <section className="ui-carousel-container">{children}</section>
       </CarouselContext.Provider>
     </Suspense>
   );

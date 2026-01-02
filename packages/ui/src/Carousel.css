@@ -1,5 +1,5 @@
 /* --- Main Carousel Styles --- */
-.carousel-container {
+.ui-carousel-container {
   overflow: hidden;
   height: 650px;
   width: 90%;
@@ -8,19 +8,22 @@
   position: relative; /* **FIX:** Sets the positioning context for buttons */
 }
 
-.slide-container {
+.ui-slide-container {
   display: flex;
   height: 100%;
   width: 100%;
 }
 
-.slide-item {
+.ui-slide-item {
   min-width: 100%; /* Still 100% for the main carousel */
   flex-shrink: 0;
   height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.slide-item a {
+.ui-slide-item a {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -29,7 +32,7 @@
   text-decoration: none;
 }
 
-.movie-poster {
+.ui-movie-poster {
   object-fit: cover;
   border-radius: 8px;
   max-width: 80vw;
@@ -40,7 +43,7 @@
 }
 
 /* --- Navigation Button Styles (Applied to both carousels) --- */
-.nav-button {
+.ui-nav-button {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -58,15 +61,15 @@
 }
 
 /* **FIX:** Uncommented the positioning rules */
-.nav-button.left {
+.ui-nav-button.left {
   left: 10px;
 }
 
-.nav-button.right {
+.ui-nav-button.right {
   right: 10px;
 }
 
 /* Show buttons on hover */
-.carousel-container:hover .nav-button {
+.ui-carousel-container:hover .ui-nav-button {
   opacity: 1;
 }
