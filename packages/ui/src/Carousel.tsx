@@ -11,9 +11,13 @@ import { MainItem } from "./Carousel.type";
 export const IMG_BASE_URL = "https://image.tmdb.org/t/p/w500";
 
 interface CarouselContextProps {
+  /** 슬라이드의 아이템 리스트 */
   extendedMovieList: MainItem[];
+  /** 슬라이드의 transform 스타일 */
   slideTransformStyle: React.CSSProperties;
+  /** 슬라이드 이동 함수 */
   moveCarousel: (direction: number) => void;
+  /** 아이템 클릭 함수 */
   handleClickItem: (id: number, type: "movie" | "tv") => void;
 }
 
