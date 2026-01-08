@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "vite",
-    "build:staging": "cross-env NODE_ENV=production APP_PHASE=staging webpack --config webpack.prod.js",
-    "build:production": "cross-env NODE_ENV=production APP_PHASE=production webpack --config webpack.prod.js",
+    "build:staging": "vite build --mode staging",
+    "build:production": "vite build --mode production",
+    "preview": "vite preview",
     "prepare": "husky install"
   },
   "keywords": [],
