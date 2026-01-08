@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import Carousel from "./Carousel";
 
 const meta: Meta<typeof Carousel> = {
+  tags: ["autodocs"],
   title: "Components/Carousel", // Storybook 메뉴에서 보여질 경로
   component: Carousel,
 };

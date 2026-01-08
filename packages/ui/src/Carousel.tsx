@@ -70,8 +70,11 @@ const NextButton: FC = () => {
 };
 
 interface CarouselProps {
+  /** 슬라이드 아이템 리스트 */
   movieList: MainItem[] | [];
+  /** 슬라이드 아이템을 표시할 컴포넌트 */
   children: ReactNode;
+  /** 아이템 클릭 이벤트 핸들러 */
   handleClickItem: (id: number, type: "movie" | "tv") => void;
 }
 
@@ -81,6 +84,9 @@ type CarouselComponent = FC<CarouselProps> & {
   NextButton: FC;
 };
 
+/**
+ * Carousel 컴포넌트
+ */
 const Carousel: CarouselComponent = ({
   movieList,
   children,
