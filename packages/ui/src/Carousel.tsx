@@ -7,13 +7,18 @@ import React, {
 } from "react";
 import { useCarousel } from "./hooks/useCarousel";
 import { MainItem } from "./Carousel.type";
+import "./Carousel.css";
 
 export const IMG_BASE_URL = "https://image.tmdb.org/t/p/w500";
 
 interface CarouselContextProps {
+  /** 슬라이드의 아이템 리스트 */
   extendedMovieList: MainItem[];
+  /** 슬라이드의 transform 스타일 */
   slideTransformStyle: React.CSSProperties;
+  /** 슬라이드 이동 함수 */
   moveCarousel: (direction: number) => void;
+  /** 아이템 클릭 함수 */
   handleClickItem: (id: number, type: "movie" | "tv") => void;
 }
 
@@ -24,17 +29,17 @@ const Track: FC = () => {
   const { extendedMovieList, slideTransformStyle, handleClickItem } = context;
 
   return (
-    <div className="slide-container" style={slideTransformStyle}>
+    <div className="ui-slide-container" style={slideTransformStyle}>
       {extendedMovieList.map((movie: MainItem) => (
         <div
           key={movie.id}
-          className="slide-item"
+          className="ui-slide-item"
           onClick={() => handleClickItem(movie.id, "movie")}
         >
           <img
             src={`${IMG_BASE_URL}${movie.poster_path}`}
             alt={movie.title}
-            className="movie-poster"
+            className="ui-movie-poster"
           />
         </div>
       ))}
@@ -47,7 +52,7 @@ const PrevButton: FC = () => {
   const { moveCarousel } = context;
 
   return (
-    <button onClick={() => moveCarousel(-1)} className="nav-button left">
+    <button onClick={() => moveCarousel(-1)} className="ui-nav-button left">
       <span>❮</span>
     </button>
   );
@@ -58,15 +63,18 @@ const NextButton: FC = () => {
   const { moveCarousel } = context;
 
   return (
-    <button onClick={() => moveCarousel(1)} className="nav-button right">
+    <button onClick={() => moveCarousel(1)} className="ui-nav-button right">
       <span>❯</span>
     </button>
   );
 };
 
 interface CarouselProps {
+  /** 슬라이드 아이템 리스트 */
   movieList: MainItem[] | [];
+  /** 슬라이드 아이템을 표시할 컴포넌트 */
   children: ReactNode;
+  /** 아이템 클릭 이벤트 핸들러 */
   handleClickItem: (id: number, type: "movie" | "tv") => void;
 }
 
@@ -76,6 +84,9 @@ type CarouselComponent = FC<CarouselProps> & {
   NextButton: FC;
 };
 
+/**
+ * Carousel 컴포넌트
+ */
 const Carousel: CarouselComponent = ({
   movieList,
   children,
@@ -99,13 +110,13 @@ const Carousel: CarouselComponent = ({
   };
 
   if (!movieList || movieList.length === 0) {
-    return <section className="carousel-container">Loading...</section>;
+    return <section className="ui-carousel-container">Loading...</section>;
   }
 
   return (
     <Suspense fallback={<div>Loading carousel...</div>}>
       <CarouselContext.Provider value={value}>
-        <section className="carousel-container">{children}</section>
+        <section className="ui-carousel-container">{children}</section>
       </CarouselContext.Provider>
     </Suspense>
   );
