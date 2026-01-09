@@ -70,11 +70,20 @@ const NextButton: FC = () => {
 };
 
 interface CarouselProps {
-  /** 슬라이드 아이템 리스트 */
-  movieList: MainItem[] | [];
-  /** 슬라이드 아이템을 표시할 컴포넌트 */
+  /**
+   * 슬라이드에 표시할 영화/TV 쇼 아이템 리스트
+   * @default []
+   */
+  movieList: MainItem[];
+  /**
+   * 슬라이드 아이템을 감싸는 컨테이너 컴포넌트
+   */
   children: ReactNode;
-  /** 아이템 클릭 이벤트 핸들러 */
+  /**
+   * 아이템 클릭 시 호출되는 함수
+   * @param id 클릭된 아이템의 ID
+   * @param type 아이템의 미디어 타입 (movie | tv)
+   */
   handleClickItem: (id: number, type: "movie" | "tv") => void;
 }
 
