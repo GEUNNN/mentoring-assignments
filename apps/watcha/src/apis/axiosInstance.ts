@@ -6,14 +6,12 @@ import axios, {
 } from "axios";
 
 const instance: AxiosInstance = axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
+  baseURL: process.env.NEXT_PUBLIC_API_URL,
 });
 
 instance.interceptors.request.use(
   function (config) {
-    config.headers.Authorization = `Bearer ${
-      import.meta.env.VITE_ACCESS_TOKEN
-    }`;
+    config.headers.Authorization = `Bearer ${process.env.NEXT_PUBLIC_ACCESS_TOKEN}`;
     return config;
   },
   function (error) {

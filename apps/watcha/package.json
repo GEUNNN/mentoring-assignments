@@ -4,10 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "vite",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "prepare": "husky install",
     "build:staging": "cross-env NODE_ENV=production APP_PHASE=staging webpack --config webpack.prod.js",
-    "build:production": "cross-env NODE_ENV=production APP_PHASE=production webpack --config webpack.prod.js",
-    "prepare": "husky install"
+    "build:production": "cross-env NODE_ENV=production APP_PHASE=production webpack --config webpack.prod.js"
   },
   "keywords": [],
   "author": "",
@@ -23,7 +25,8 @@
     "react-router-dom": "^7.9.3",
     "@repo/ui": "workspace:*",
     "@repo/browserslist-config": "workspace:*",
-    "@repo/eslint-config": "workspace:*"
+    "@repo/eslint-config": "workspace:*",
+    "next": "^16.1.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.28.3",

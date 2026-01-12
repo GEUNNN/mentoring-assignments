@@ -1,5 +1,5 @@
 import Header from "../components/Header";
-import "./Main.css";
+import "./Main.module.css";
 import { FC } from "react";
 import {
   useQueryGetAiringTodayTVShows,

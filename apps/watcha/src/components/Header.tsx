@@ -1,6 +1,6 @@
 import Logo from "../assets/logo.png";
 import Bell from "../assets/bell-860.png";
-import "./Header.css";
+import "./Header.module.css";
 import { Link, useNavigate } from "react-router";
 import React from "react";
 
