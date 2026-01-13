@@ -1,8 +1,11 @@
+import React from "react";
+import { useRouter } from "next/router";
+import Link from "next/link";
+import Image from "next/image";
+import styles from "./Header.module.css";
+
 import Logo from "../assets/logo.png";
 import Bell from "../assets/bell-860.png";
-import "./Header.module.css";
-import { Link, useNavigate } from "react-router";
-import React from "react";
 
 interface HeaderProps {
   isSearchPage: boolean;
@@ -13,19 +16,19 @@ const Header: React.FC<HeaderProps> = ({
   isSearchPage = false,
   setKeyword,
 }) => {
-  const navigate = useNavigate();
+  const router = useRouter();
   const handleSearchClick = () => {
-    navigate("/search");
+    router.push("/search");
   };
 
   const renderSearchArea = () => {
     if (isSearchPage) {
       return (
-        <div className="search-input-container">
+        <div className={styles["search-input-container"]}>
           <input
             type="text"
             placeholder="콘텐츠, 태그, 인물, 리스트 검색"
-            className="search-input full-width"
+            className={`${styles["search-input"]} ${styles["full-width"]}`}
             autoFocus
             onChange={(e) => setKeyword && setKeyword(e.target.value)}
           />
@@ -33,11 +36,14 @@ const Header: React.FC<HeaderProps> = ({
       );
     } else {
       return (
-        <button className="search-button-wrapper" onClick={handleSearchClick}>
+        <button
+          className={styles["search-button-wrapper"]}
+          onClick={handleSearchClick}
+        >
           <input
             type="text"
             placeholder="검색"
-            className="search-input"
+            className={styles["search-input"]}
             readOnly
           />
         </button>
@@ -46,13 +52,20 @@ const Header: React.FC<HeaderProps> = ({
   };
 
   return (
-    <header className="header-container">
-      <nav className="header-nav">
-        <div className="nav-left">
-          <Link to="/">
-            <img src={Logo} alt="WATCHA" className="logo" />
+    <header className={styles["header-container"]}>
+      <nav className={styles["header-nav"]}>
+        <div className={styles["nav-left"]}>
+          <Link href="/">
+            <Image
+              src={Logo}
+              alt="WATCHA"
+              className={styles.logo}
+              width={100}
+              height={30}
+              priority
+            />
           </Link>
-          <ul className="main-menu">
+          <ul className={styles["main-menu"]}>
             <li>
               <a href="#subscribe">구독</a>
             </li>
@@ -68,14 +81,20 @@ const Header: React.FC<HeaderProps> = ({
           </ul>
         </div>
 
-        <div className="nav-right">
+        <div className={styles["nav-right"]}>
           <div>{renderSearchArea()}</div>
 
-          <div className="icon-wrapper">
-            <img src={Bell} alt="알림" className="bell-icon" />
+          <div className={styles["icon-wrapper"]}>
+            <Image
+              src={Bell}
+              alt="알림"
+              className={styles["bell-icon"]}
+              width={24}
+              height={24}
+            />
           </div>
 
-          <button className="login-button">로그인/회원가입</button>
+          <button className={styles["login-button"]}>로그인/회원가입</button>
         </div>
       </nav>
     </header>

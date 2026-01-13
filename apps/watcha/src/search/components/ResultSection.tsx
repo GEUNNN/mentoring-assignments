@@ -1,6 +1,7 @@
 import React from "react";
 import { MovieListItem } from "../Search.type";
 import ResultItems from "./ResultItems";
+import styles from "../Search.module.css";
 
 interface ResultSectionProps {
   searchResults: MovieListItem[];
@@ -12,7 +13,7 @@ const ResultSection: React.FC<ResultSectionProps> = ({
   keyword,
 }) => {
   return (
-    <section className="search-results-container">
+    <section className={styles["search-results-container"]}>
       {searchResults.map(
         ({
           id,
@@ -32,7 +33,7 @@ const ResultSection: React.FC<ResultSectionProps> = ({
         )
       )}
       {searchResults.length === 0 || keyword.length < 2 ? (
-        <p className="no-results-text">
+        <p className={styles["no-results-text"]}>
           {keyword.length < 2
             ? "검색어를 입력해주세요 (최소 2자 이상)"
             : "검색 결과가 없습니다."}

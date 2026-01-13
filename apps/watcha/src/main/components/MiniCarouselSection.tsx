@@ -2,6 +2,8 @@ import { FC, Suspense, useRef } from "react";
 import { IMG_BASE_URL } from "../../apis/config";
 import { MainItem } from "../Main.type";
 import { useCarousel } from "../../hooks/useCarousel";
+import styles from "../Main.module.css";
+import Image from "next/image";
 
 interface MiniCarouselSectionProps {
   list: MainItem[];
@@ -25,21 +27,24 @@ const MiniCarouselSection: FC<MiniCarouselSectionProps> = ({
       : [];
 
   const fallbackContent = (
-    <section className="mini-carousel-container">Loading...</section>
+    <section className={styles["mini-carousel-container"]}>Loading...</section>
   );
 
   return (
     <Suspense fallback={fallbackContent}>
-      <div className="mini-carousel-wrapper">
-        <section className="mini-carousel-container">
-          <h2 className="mini-carousel-label">{label}</h2>
+      <div className={styles["mini-carousel-wrapper"]}>
+        <section className={styles["mini-carousel-container"]}>
+          <h2 className={styles["mini-carousel-label"]}>{label}</h2>
           <div
-            className="mini-slide-container"
+            className={styles["mini-slide-container"]}
             ref={carouselRef}
             style={slideTransformStyle}
           >
-            {extenedList.map((item: MainItem) => (
-              <div key={item.id} className="mini-slide-item">
+            {extenedList.map((item: MainItem, index: number) => (
+              <div
+                key={`${item.id}-${index}`}
+                className={styles["mini-slide-item"]}
+              >
                 <div
                   onClick={() =>
                     handleClickItem(
@@ -47,33 +52,41 @@ const MiniCarouselSection: FC<MiniCarouselSectionProps> = ({
                       item.video === false ? "movie" : "tv"
                     )
                   }
-                  className="mini-carousel-card"
+                  className={styles["mini-carousel-card"]}
                 >
-                  <div className="mini-poster-wrapper">
+                  <div className={styles["mini-poster-wrapper"]}>
                     <img
                       src={`${IMG_BASE_URL}${item.poster_path}`}
                       alt={item.title}
                       loading="lazy"
-                      className="mini-carousel-image"
+                      className={styles["mini-carousel-image"]}
                     />
-                    <div className="card-overlay">
+                    <div className={styles["card-overlay"]}>
                       <h3
-                        className="card-logo"
+                        className={styles["card-logo"]}
                         style={{ fontSize: "20px", fontWeight: "bold" }}
                       >
                         {item.title}
                       </h3>
-                      <p className="card-description">{item.overview}</p>
+                      <p className={styles["card-description"]}>
+                        {item.overview}
+                      </p>
                     </div>
                   </div>
                 </div>
               </div>
             ))}
           </div>
-          <button onClick={() => moveCarousel(-1)} className="nav-button left">
+          <button
+            onClick={() => moveCarousel(-1)}
+            className={`${styles["nav-button"]} ${styles.left}`}
+          >
             <span>❮</span>
           </button>
-          <button onClick={() => moveCarousel(1)} className="nav-button right">
+          <button
+            onClick={() => moveCarousel(1)}
+            className={`${styles["nav-button"]} ${styles.right}`}
+          >
             <span>❯</span>
           </button>
         </section>

@@ -6,6 +6,7 @@ import {
 } from "@tanstack/react-query";
 import { ErrorBoundary } from "react-error-boundary";
 import "../styles/globals.css";
+import "../main/Main.module.css";
 
 const queryClient = new QueryClient();
 
