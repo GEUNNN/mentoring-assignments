@@ -1,5 +1,4 @@
 import Header from "../components/Header";
-// ✅ 1. 'styles' 객체로 임포트
 import styles from "./Main.module.css";
 import { FC } from "react";
 import {

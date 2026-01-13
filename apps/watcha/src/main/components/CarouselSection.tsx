@@ -1,10 +1,10 @@
 import { FC, useRef } from "react";
 import { IMG_BASE_URL } from "../../apis/config";
-import { MainListResult } from "../Main.type";
+import { MainItem } from "../Main.type";
 import { useCarousel } from "../../hooks/useCarousel";
 
 interface CarouselSectionProps {
-  movieList: MainListResult[];
+  movieList: MainItem[];
 }
 
 const CarouselSection: FC<CarouselSectionProps> = ({ movieList }) => {
@@ -17,7 +17,7 @@ const CarouselSection: FC<CarouselSectionProps> = ({ movieList }) => {
     movieList[movieList.length - 1],
     ...movieList,
     movieList[0],
-  ] as MainListResult[];
+  ] as MainItem[];
 
   if (!movieList || movieList.length === 0) {
     return <section className="carousel-container">Loading...</section>;
@@ -30,7 +30,7 @@ const CarouselSection: FC<CarouselSectionProps> = ({ movieList }) => {
         style={slideTransformStyle}
         ref={carouselRef}
       >
-        {extendedMovieList.map((movie: MainListResult) => (
+        {extendedMovieList.map((movie: MainItem) => (
           <div
             key={movie.id}
             className="slide-item"
