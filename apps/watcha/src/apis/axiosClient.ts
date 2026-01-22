@@ -14,7 +14,7 @@ export const getGenreList = () =>
 
 export const postFavorite = (movieId: number) =>
   instance
-    .post(`/account/${import.meta.env.VITE_ACCOUNT_ID}/favorite`, {
+    .post(`/account/${process.env.NEXT_PUBLIC_ACCOUNT_ID}/favorite`, {
       media_type: "movie",
       media_id: movieId,
       favorite: true,

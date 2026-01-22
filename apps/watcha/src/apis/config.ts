@@ -1,5 +1,5 @@
 export const getApiOptions = () => {
-  const accessToken = import.meta.env.VITE_ACCESS_TOKEN;
+  const accessToken = process.env.NEXT_PUBLIC_ACCESS_TOKEN;
 
   return {
     method: "GET",

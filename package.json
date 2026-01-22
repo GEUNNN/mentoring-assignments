@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "watcha": "pnpm --filter mentoring-assignments-apps start"
+    "watcha": "pnpm --filter mentoring-assignments-apps start",
+    "build:watcha": "pnpm --filter mentoring-assignments-apps build"
   },
   "keywords": [],
   "author": "",

@@ -1,5 +1,5 @@
 import Header from "../components/Header";
-import "./Main.css";
+import styles from "./Main.module.css";
 import { FC } from "react";
 import {
   useQueryGetAiringTodayTVShows,
@@ -8,10 +8,10 @@ import {
 } from "../query/query";
 import MiniCarouselSection from "./components/MiniCarouselSection";
 import { Carousel } from "@repo/ui";
-import { useNavigate } from "react-router";
+import { useRouter } from "next/router";
 
 const Main: FC = () => {
-  const navigate = useNavigate();
+  const router = useRouter();
   const { data: mainList } = useQueryGetMainList();
   const { data: airingTodayList } = useQueryGetAiringTodayTVShows();
   const { data: upcomingList } = useQueryGetUpcomingMovies();
@@ -21,18 +21,22 @@ const Main: FC = () => {
   const upcomingListArray = upcomingList?.results || [];
 
   const handleClickItem = (id: number, type: "movie" | "tv") => {
-    console.log("type >>>", type);
-    navigate(`/contents/${id}`, { state: type });
+    router.push({
+      pathname: `/contents/${id}`,
+      query: { type: type },
+    });
   };
 
   return (
-    <div className="app-container">
+    <div className={styles["app-container"]}>
       <Header isSearchPage={false} />
+
       <Carousel movieList={movieList} handleClickItem={handleClickItem}>
         <Carousel.Track />
         <Carousel.PrevButton />
         <Carousel.NextButton />
       </Carousel>
+
       <MiniCarouselSection
         label="Tv show"
         list={tvShowsArray}

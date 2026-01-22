@@ -1,6 +1,6 @@
 import React from "react";
 import { IMG_BASE_URL } from "../../apis/config";
-import "../Search.css";
+import styles from "../Search.module.css";
 import { Link } from "react-router";
 
 interface ResultItemProps {
@@ -20,20 +20,20 @@ const ResultItems: React.FC<ResultItemProps> = ({
 }) => {
   return (
     <Link
-      className="result-item-container"
+      className={styles["result-item-container"]}
       to={`/contents/${id}`}
       state={{ type: "movie" }}
     >
       <img
-        className="result-movie-poster"
+        className={styles["result-movie-poster"]}
         src={`${IMG_BASE_URL}${image}`}
         alt={title}
       />
-      <div className="item-info">
-        <h3 className="item-title">{title}</h3>
-        <div className="item-details">
-          <span className="item-year">{year}</span>
-          <span className="item-vote">
+      <div className={styles["item-info"]}>
+        <h3 className={styles["item-title"]}>{title}</h3>
+        <div className={styles["item-details"]}>
+          <span className={styles["item-year"]}>{year}</span>
+          <span className={styles["item-vote"]}>
             ⭐️ {voteAverage ? voteAverage.toFixed(1) : "N/A"}
           </span>
         </div>
