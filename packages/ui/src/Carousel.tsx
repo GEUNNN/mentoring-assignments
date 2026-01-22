@@ -77,12 +77,14 @@ interface CarouselProps {
   movieList: MainItem[];
   /**
    * 슬라이드 아이템을 감싸는 컨테이너 컴포넌트
+   * @default Track
    */
   children: ReactNode;
   /**
    * 아이템 클릭 시 호출되는 함수
    * @param id 클릭된 아이템의 ID
    * @param type 아이템의 미디어 타입 (movie | tv)
+   * @default () => {}
    */
   handleClickItem: (id: number, type: "movie" | "tv") => void;
 }
@@ -97,9 +99,9 @@ type CarouselComponent = FC<CarouselProps> & {
  * Carousel 컴포넌트
  */
 const Carousel: CarouselComponent = ({
-  movieList,
+  movieList = [],
   children,
-  handleClickItem,
+  handleClickItem = () => {},
 }: CarouselProps) => {
   const { moveCarousel, slideTransformStyle } = useCarousel({
     movieListLength: movieList.length,
